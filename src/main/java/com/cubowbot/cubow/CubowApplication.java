@@ -3,7 +3,6 @@ package com.cubowbot.cubow;
 import com.cubowbot.cubow.Commands.CommandList;
 import com.cubowbot.cubow.Handler.*;
 import com.cubowbot.cubow.Listener.*;
-import com.mongodb.client.MongoClients;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -15,9 +14,6 @@ import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
-import org.springframework.data.mongodb.core.MongoOperations;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.SimpleMongoClientDatabaseFactory;
 
 import java.io.IOException;
 import java.util.EnumSet;
