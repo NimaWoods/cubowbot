@@ -1,8 +1,8 @@
 package com.cubowbot.cubow;
 
-import com.cubowbot.cubow.Commands.CommandList;
-import com.cubowbot.cubow.Handler.*;
-import com.cubowbot.cubow.Listener.*;
+import com.cubowbot.cubow.commands.CommandList;
+import com.cubowbot.cubow.handler.*;
+import com.cubowbot.cubow.listener.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
