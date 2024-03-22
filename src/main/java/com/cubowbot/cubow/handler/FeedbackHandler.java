@@ -7,6 +7,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.*;
 
+import java.awt.Color;
 import java.io.IOException;
 import java.util.EnumMap;
 import java.util.Objects;
@@ -36,7 +37,7 @@ public class FeedbackHandler {
                 "\\n\\nBug Beschreibung: " + event.getOption("description").getAsString() +
                 "\\n\\nTest Link: " + link +
                 "\\n\\nTicket by: " + event.getMember().getNickname() +
-                "\\n\\From Server: " + event.getGuild().getName() + " with ID " + event.getGuild().getId() +
+                "\\n\\nFrom Server: " + event.getGuild().getName() + " with ID " + event.getGuild().getId() +
                 "\", \"severity\": \"high\"}";
 
         RequestBody requestBody = RequestBody.create(json, MediaType.parse("application/json"));
@@ -51,9 +52,19 @@ public class FeedbackHandler {
         try {
             Response response = client.newCall(request).execute();
             if (response.isSuccessful()) {
-                System.out.println(response.body().string());
+                EmbedBuilder embedBuilder = new EmbedBuilder();
+                embedBuilder.setTitle(event.getOption("title").getAsString(), "https://nimawoods.codecks.io/decks/11-bugs");
+                embedBuilder.setDescription("Dein Vorschlag wurde erfolgreich eingetragen. Du kannst den Fortschritt hier verfolgen: ");
+                embedBuilder.addField("suggestslink", "https://nimawoods.codecks.io/decks/11-bugs",false);
+                embedBuilder.setFooter(event.getMember().getEffectiveName(), event.getMember().getEffectiveAvatarUrl());
+                embedBuilder.setColor(Color.MAGENTA);
+
+                event.replyEmbeds(embedBuilder.build()).setEphemeral(true).queue();
             } else {
                 System.out.println("Request failed: " + response.code() + " - " + response.message());
+                event.reply("Something went wrong :/")
+                        .setEphemeral(true)
+                        .queue();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -77,7 +88,7 @@ public class FeedbackHandler {
                 "\\n\\nBug Beschreibung: " + event.getOption("description").getAsString() +
                 "\\n\\nTestLink: " + link +
                 "\\n\\nTicket by: " + event.getMember().getNickname() +
-                "\\n\\From Server: " + event.getGuild().getName() + " with ID " + event.getGuild().getId() +
+                "\\n\\nFrom Server: " + event.getGuild().getName() + " with ID " + event.getGuild().getId() +
                 "\", \"severity\": \"high\"}";
 
         System.out.println(json);
@@ -95,12 +106,13 @@ public class FeedbackHandler {
             Response response = client.newCall(request).execute();
             if (response.isSuccessful()) {
                 EmbedBuilder embedBuilder = new EmbedBuilder();
-                embedBuilder.setTitle(event.getOption("title").getAsString(), "https://open.codecks.io/cubowbot/decks/14-suggestions");
+                embedBuilder.setTitle(event.getOption("title").getAsString(), "https://nimawoods.codecks.io/decks/14-suggestions");
                 embedBuilder.setDescription("Dein Vorschlag wurde erfolgreich eingetragen. Du kannst den Fortschritt hier verfolgen: ");
-                embedBuilder.addField("suggestslink", "Suggestions",false);
+                embedBuilder.addField("suggestslink", "https://nimawoods.codecks.io/decks/14-suggestions",false);
                 embedBuilder.setFooter(event.getMember().getEffectiveName(), event.getMember().getEffectiveAvatarUrl());
+                embedBuilder.setColor(Color.MAGENTA);
 
-                event.replyEmbeds(embedBuilder.build()).queue();
+                event.replyEmbeds(embedBuilder.build()).setEphemeral(true).queue();
             } else {
                 System.out.println("Request failed: " + response.code() + " - " + response.message());
                 event.reply("Something went wrong :/")
