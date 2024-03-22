@@ -43,7 +43,7 @@ public class SlashCommandListener extends ListenerAdapter {
                 + " for user " + event.getMember().getEffectiveName()
                 + " on server " + event.getGuild().getName());
 
-        // Load Handler as Objects
+        // Load Handler
         TextResponseHandler textResponseHandler = new TextResponseHandler(event);
         ModerationHandler moderationHandler = new ModerationHandler(event);
         MiscHandler miscHandler = new MiscHandler(event);

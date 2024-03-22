@@ -5,6 +5,7 @@ import com.cubowbot.cubow.handler.WelcomeHandler;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
+import net.dv8tion.jda.api.events.channel.ChannelDeleteEvent;
 import net.dv8tion.jda.api.events.guild.GuildBanEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -12,66 +13,6 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import java.time.OffsetDateTime;
 
 public class EventListener extends ListenerAdapter {
-     //private static final List<Long> CHANNEL_IDS = Arrays.asList(1053403251082534933L, 1134085819729203300L);
-
-    /*@Override
-    public void onMessageReceived(MessageReceivedEvent event) {
-        if (CHANNEL_IDS.contains(event.getChannel().getIdLong())) {
-            if (!event.getAuthor().isBot()) {
-
-                EmbedBuilder eb = new EmbedBuilder();
-
-                String content = event.getMessage().getContentDisplay();
-
-                String title = null;
-                String description = null;
-
-                String[] lines = content.split("\\R", 2);
-                try {
-                    title = lines[0];
-                    description = lines[1];
-                } catch (Exception e) {
-
-                    event.getMessage().delete().queueAfter(5, TimeUnit.SECONDS);
-                    event.getChannel().sendMessage("Message need Title and Text..").queue(message -> {
-                        message.delete().queueAfter(5, TimeUnit.SECONDS);
-                    });
-                   throw e;
-                };
-
-                String author = event.getMember().getNickname();
-                String pb = event.getMember().getUser().getEffectiveAvatarUrl();
-
-                Message message = event.getMessage();
-                Mentions mentions = message.getMentions();
-
-                eb.setTitle(title, null); 
-                eb.setColor(Color.magenta);  
-                eb.setDescription(description);
-
-                eb.setFooter(author, pb);
-
-                List<Role> mentionedRoles = mentions.getRoles();
-                if (!mentionedRoles.isEmpty()) {
-                    String mention = mentionedRoles.get(0).getName();
-
-                    description = description.replace("@" + mention, "");
-                    title = title.replace("@" + mention, "");
-                    
-                    eb.setDescription("@" + mention + " " + description);
-                    eb.setTitle(title);
-                }
-
-                if (!event.getMessage().getAttachments().isEmpty()) {
-                    Attachment attachment = event.getMessage().getAttachments().get(0);
-                    eb.setImage(attachment.getUrl());
-                }
-        
-                event.getMessage().delete().queue();
-                event.getChannel().sendMessageEmbeds(eb.build()).queue();
-            }
-        }
-    }*/
 
     @Override
     public void onGuildMemberJoin(GuildMemberJoinEvent event) {

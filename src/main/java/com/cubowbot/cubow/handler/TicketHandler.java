@@ -129,6 +129,13 @@ public class TicketHandler {
 
     public void close() {
         event.reply("Ticket wird von " + event.getMember().getAsMention() + " geschlossen").queue();
+
+        if(event.getChannel().getType().toString().equals("TextChannel")) {
+            toTranscript(event.getChannel().asTextChannel(), event.getGuild());
+        } else {
+            System.out.println("[Close Ticket] Channel " + event.getChannel() + " is not an TextChannel");
+        }
+
         event.getChannel().delete().queueAfter(5, TimeUnit.SECONDS);
     }
 
@@ -477,5 +484,16 @@ public class TicketHandler {
                         textChannel.delete().queue();
                     }, 1, TimeUnit.HOURS);
                 });
+    }
+
+    public void toTranscript(TextChannel channel, Guild server) {
+        ConfigHandler.getServerConfig(server.getId(), "Transcript_Channel");
+
+        TextChannelHandler textChannelHandler = new TextChannelHandler();
+        List<Message> messages = textChannelHandler.getAllMessages(channel);
+
+        // Todo Datenbank implimentierung sobald sie steht
+        JsonHandler jsonHandler = new JsonHandler();
+        jsonHandler.saveListToJson(messages, "transcripts.json");
     }
 }
