@@ -52,6 +52,7 @@ public class SlashCommandListener extends ListenerAdapter {
         GiveawayHandler giveawayHandler = new GiveawayHandler(event);
         EmbedHandler embedHandler = new EmbedHandler(event);
         AiCommandHandler aiCommandHandler = new AiCommandHandler(event);
+        FeedbackHandler feedbackHandler = new FeedbackHandler(event);
 
         ModalsHandler modals = new ModalsHandler();
 
@@ -170,6 +171,17 @@ public class SlashCommandListener extends ListenerAdapter {
             case "dall-e":
                 aiCommandHandler.dalle();
                 break;
+        }
+
+        // Feedback Commands
+        switch (event.getName()) {
+            case "bug":
+                feedbackHandler.bug();
+                break;
+            case "suggest":
+                feedbackHandler.suggest();
+                break;
+
         }
     }
 }

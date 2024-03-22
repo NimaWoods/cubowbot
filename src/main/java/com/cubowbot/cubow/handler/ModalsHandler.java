@@ -33,4 +33,5 @@ public class ModalsHandler {
             throw new IllegalArgumentException("ERROR: Event is null");
         }
     }
+
 }

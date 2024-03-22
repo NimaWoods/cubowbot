@@ -19,7 +19,6 @@ public class TextChannelHandler {
                 break;
             }
 
-            // Update last message id for pagination
             lastMessageId = retrievedMessages.get(retrievedMessages.size() - 1).getIdLong();
 
             messages.addAll(retrievedMessages);

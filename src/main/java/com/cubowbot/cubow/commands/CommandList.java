@@ -11,6 +11,7 @@ public class CommandList {
     public void loadCommands(JDA bot) {
 
         CommandLoader commandLoader = new CommandLoader();
+        TestserverCommandLoader testserverCommandLoader = new TestserverCommandLoader();
 
         EmbedCommands embedCommands = new EmbedCommands();
         EventCommands eventCommands = new EventCommands();
@@ -23,6 +24,7 @@ public class CommandList {
         ReportCommands reportCommands = new ReportCommands();
         TextCommands textCommands = new TextCommands();
         TicketCommands ticketCommands = new TicketCommands();
+        FeedbackCommands feedbackCommands = new FeedbackCommands();
 
         // Context Menu
         ContextCommands contextCommands = new ContextCommands();
@@ -44,10 +46,12 @@ public class CommandList {
         commandList.addAll(textCommands.loadList());
         commandList.addAll(ticketCommands.loadList());
         commandList.addAll(contextCommands.loadList());
+        commandList.addAll(feedbackCommands.loadList());
 
         System.out.println(" ");
 
         // Load all commands
         commandLoader.loadCommands(commandList, bot);
+        testserverCommandLoader.loadCommands();
     }
 }

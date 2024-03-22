@@ -1,15 +1,92 @@
 package com.cubowbot.cubow.handler;
 
+import com.cubowbot.cubow.listener.ContextMenuListener;
+import com.cubowbot.cubow.listener.EventListener;
+import com.cubowbot.cubow.listener.ModalListener;
+import com.cubowbot.cubow.listener.SlashCommandListener;
 import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.requests.GatewayIntent;
+import net.dv8tion.jda.api.utils.ChunkingFilter;
+import net.dv8tion.jda.api.utils.MemberCachePolicy;
+import net.dv8tion.jda.api.utils.cache.CacheFlag;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.EnumSet;
 
 public class BotHandler extends Thread {
 
     ConfigHandler configHandler = new ConfigHandler();
+
+    public JDABuilder build() {
+        System.out.println("Building JDA...");
+
+        System.out.println("Retrieving Token...");
+        String token = null;
+
+        configHandler.checkConfigs();
+        try {
+            token = configHandler.loadToken();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        JDABuilder builder = JDABuilder.createDefault(token);
+
+        // Load Handler
+        EventListener eventListener = new EventListener();
+        ButtonHandler buttonHandler = new ButtonHandler();
+        SlashCommandListener slashCommandListener = new SlashCommandListener();
+        AutoCompleteHandler autoCompleteHandler = new AutoCompleteHandler();
+        ModalListener modalListener = new ModalListener();
+        ContextMenuListener contextMenuListener = new ContextMenuListener();
+
+
+        // Load Event Listener
+        System.out.println("\nLoading Event Listener...");
+
+        System.out.print("slashCommandListener");
+        builder.addEventListeners(slashCommandListener);
+        System.out.print(" -> LOADED\n");
+
+        System.out.print("eventListener");
+        builder.addEventListeners(eventListener);
+        System.out.print(" -> LOADED\n");
+
+        System.out.print("buttonHandler");
+        builder.addEventListeners(buttonHandler);
+        System.out.print(" -> LOADED\n");
+
+        System.out.print("autoCompleteHandler");
+        builder.addEventListeners(autoCompleteHandler);
+        System.out.print(" -> LOADED\n");
+
+        System.out.print("modalListener");
+        builder.addEventListeners(modalListener);
+        System.out.print(" -> LOADED\n");
+
+        System.out.print("contextMenuListener");
+        builder.addEventListeners(contextMenuListener);
+        System.out.print(" -> LOADED\n");
+
+        System.out.println(" ");
+
+        builder.setStatus(OnlineStatus.ONLINE);
+
+        builder.setChunkingFilter(ChunkingFilter.ALL);
+        builder.setMemberCachePolicy(MemberCachePolicy.ALL);
+        builder.enableIntents(GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_PRESENCES, GatewayIntent.GUILD_VOICE_STATES, GatewayIntent.DIRECT_MESSAGE_TYPING, GatewayIntent.DIRECT_MESSAGES, GatewayIntent.MESSAGE_CONTENT);
+
+        EnumSet<CacheFlag> enumSet = EnumSet.of(CacheFlag.ONLINE_STATUS, CacheFlag.CLIENT_STATUS, CacheFlag.EMOJI, CacheFlag.VOICE_STATE);
+
+        builder.enableCache(enumSet);
+
+        return builder;
+    }
 
     public void run() {
         String line = "";

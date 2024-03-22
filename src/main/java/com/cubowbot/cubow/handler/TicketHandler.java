@@ -447,7 +447,7 @@ public class TicketHandler {
             EmbedBuilder eb = new EmbedBuilder();
 
             eb.setTitle("Hier ist eine KI, die versucht dein Problem zu lösen:");
-            eb.setDescription(answer.replace("Ja, dieses Problem liegt innerhalb meines Kompetenzbereichs.", ""));
+            eb.setDescription(answer);
             eb.setThumbnail(server.getJDA().getSelfUser().getEffectiveAvatarUrl());
             eb.addField("Problem nicht gelöst?", "Bitte warte auf Unterstützung durch ein Teammitglied.", false);
             eb.setFooter("Answer Provided by ChatGPT", "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/800px-ChatGPT_logo.svg.png");

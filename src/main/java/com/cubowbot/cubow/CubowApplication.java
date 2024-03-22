@@ -26,78 +26,27 @@ public class CubowApplication {
 
 	public static void main(String[] args) throws Exception {
 
+		System.out.println("Starting Server...");
+
+		// Start Spring Server
+		SpringApplication.run(CubowApplication.class, args);
+
+		System.out.println("\nServer started\n");
+
 		System.out.println("Starting Bot...");
 
 		ConfigHandler configHandler = new ConfigHandler();
 
-		System.out.println("Retrieving Configs...");
-		configHandler.checkConfigs();
+		System.out.println("Checking Configs...");
 
-		System.out.println("Retrieving Token...");
-		String token = null;
-		try {
-			token = configHandler.loadToken();
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-
-		System.out.println("Building JDA...");
-		JDABuilder builder = JDABuilder.createDefault(token);
-
-		// Load Handler
-		EventListener eventListener = new EventListener();
-		ButtonHandler buttonHandler = new ButtonHandler();
-		SlashCommandListener slashCommandListener = new SlashCommandListener();
-		AutoCompleteHandler autoCompleteHandler = new AutoCompleteHandler();
-		ImageHandler imageHandler = new ImageHandler();
-		ModalListener modalListener = new ModalListener();
-		ContextMenuListener contextMenuListener = new ContextMenuListener();
-
-
-		// Load Event Listener
-		System.out.println("\nLoading Event Listener...");
-
-		System.out.print("slashCommandListener");
-		builder.addEventListeners(slashCommandListener);
-		System.out.print(" -> LOADED\n");
-
-		System.out.print("eventListener");
-		builder.addEventListeners(eventListener);
-		System.out.print(" -> LOADED\n");
-
-		System.out.print("buttonHandler");
-		builder.addEventListeners(buttonHandler);
-		System.out.print(" -> LOADED\n");
-
-		System.out.print("autoCompleteHandler");
-		builder.addEventListeners(autoCompleteHandler);
-		System.out.print(" -> LOADED\n");
-
-		System.out.print("modalListener");
-		builder.addEventListeners(modalListener);
-		System.out.print(" -> LOADED\n");
-
-		System.out.print("contextMenuListener");
-		builder.addEventListeners(contextMenuListener);
-		System.out.print(" -> LOADED\n");
-
-		System.out.println(" ");
-
-		builder.setStatus(OnlineStatus.ONLINE);
-
-		builder.setChunkingFilter(ChunkingFilter.ALL);
-		builder.setMemberCachePolicy(MemberCachePolicy.ALL);
-		builder.enableIntents(GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_PRESENCES, GatewayIntent.GUILD_VOICE_STATES, GatewayIntent.DIRECT_MESSAGE_TYPING, GatewayIntent.DIRECT_MESSAGES, GatewayIntent.MESSAGE_CONTENT);
-
-		EnumSet<CacheFlag> enumSet = EnumSet.of(CacheFlag.ONLINE_STATUS, CacheFlag.CLIENT_STATUS, CacheFlag.EMOJI, CacheFlag.VOICE_STATE);
-
-		builder.enableCache(enumSet);
+		BotHandler botHandler = new BotHandler();
+		JDABuilder builder = botHandler.build();
 
 		bot = builder.build();
 
 		try {
 			bot.awaitReady();
-			System.out.println("Bot Ready!");
+			System.out.println("Bot Online!");
 			System.out.println(" ");
 		} catch (Exception e) {
 			System.out.println("Error_ " + e);
@@ -105,9 +54,10 @@ public class CubowApplication {
 		}
 
 		// Setup Bot
+
+		ImageHandler imageHandler = new ImageHandler();
 		imageHandler.downloadWelcomeImage(bot);
 
-		BotHandler botHandler = new BotHandler();
 		botHandler.initializeActivity(bot);
 
 		List<Guild> guilds = bot.getGuilds();
@@ -119,10 +69,7 @@ public class CubowApplication {
 		CommandList commandList = new CommandList();
 		commandList.loadCommands(bot);
 
-		System.out.println("Starting Server...");
-
-		// Start Spring Server
-		SpringApplication.run(CubowApplication.class, args);
+		System.out.println("Done! Bot Ready");
 
 	}
 
