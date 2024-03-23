@@ -7,9 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class IndexController {
+public class StatusController {
 
-    @GetMapping("/")
+    @GetMapping("/status")
     public String index(Model model) {
 
         CubowApplication cubowApplication = new CubowApplication();
@@ -18,7 +18,8 @@ public class IndexController {
         model.addAttribute("logo", bot.getSelfUser().getAvatarUrl());
 
         model.addAttribute("botName", bot.getSelfUser().getName());
+        model.addAttribute("botStatus", bot.getStatus().name());
 
-        return "index";
+        return "status";
     }
 }

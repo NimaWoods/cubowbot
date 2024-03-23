@@ -33,5 +33,5 @@ build/
 .vscode/
 
 ### properties ###
-token.properties
+/token.properties
 server_configs.json

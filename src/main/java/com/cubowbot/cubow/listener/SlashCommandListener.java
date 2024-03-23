@@ -1,38 +1,9 @@
 package com.cubowbot.cubow.listener;
 
-import java.awt.Color;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.io.File;
-import java.time.Instant;
-import java.util.*;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
 import com.cubowbot.cubow.handler.*;
-import net.dv8tion.jda.api.entities.*;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-
-import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.Message.Attachment;
-import net.dv8tion.jda.api.entities.Widget.VoiceChannel;
-import net.dv8tion.jda.api.entities.channel.concrete.NewsChannel;
-import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
-import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
-import net.dv8tion.jda.api.entities.channel.unions.GuildChannelUnion;
-import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import net.dv8tion.jda.api.interactions.commands.OptionMapping;
-import net.dv8tion.jda.api.interactions.components.buttons.Button;
-
-import com.cubowbot.cubow.generator.EmbedGenerator;
 
 public class SlashCommandListener extends ListenerAdapter {
 
@@ -51,7 +22,7 @@ public class SlashCommandListener extends ListenerAdapter {
         TicketHandler ticketHandler = new TicketHandler(event);
         GiveawayHandler giveawayHandler = new GiveawayHandler(event);
         EmbedHandler embedHandler = new EmbedHandler(event);
-        AiCommandHandler aiCommandHandler = new AiCommandHandler(event);
+        AICommandHandler aiCommandHandler = new AICommandHandler(event);
         FeedbackHandler feedbackHandler = new FeedbackHandler(event);
 
         ModalsHandler modals = new ModalsHandler();

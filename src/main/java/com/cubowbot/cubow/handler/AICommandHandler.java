@@ -1,7 +1,6 @@
 package com.cubowbot.cubow.handler;
 
 import com.cubowbot.cubow.generator.EmbedGenerator;
-import io.github.artemnefedov.javaai.dto.Chat;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
@@ -12,11 +11,11 @@ import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import java.awt.Color;
 import java.util.List;
 
-public class AiCommandHandler {
+public class AICommandHandler {
 
     private final SlashCommandInteractionEvent event;
 
-    public AiCommandHandler(SlashCommandInteractionEvent event) {
+    public AICommandHandler(SlashCommandInteractionEvent event) {
         this.event = event;
     }
 
