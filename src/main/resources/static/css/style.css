@@ -65,6 +65,13 @@ main {
     height: calc(100% - 126px);
     flex-direction: column;
     padding: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+main img {
+    width: 300px;
+    height: 300px;
 }
 
 #placeholder {

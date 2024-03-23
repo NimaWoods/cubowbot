@@ -52,8 +52,12 @@
 <div id="placeholder"></div>
 <main>
     <h1>Server Online!</h1>
-    <p>Bot Name: <span th:text="${botName}"></span></p>
-    <p>Bot Status: <span th:text="${botStatus}"></span></p>
+    <div>
+        <img th:src="${logo}">
+        <p>Bot Name: <span th:text="${botName}"></span></p>
+        <p>Bot Status: <span th:text="${botStatus}"></span></p>
+        <p>Serving Guilds: <span th:text="${botGuilds}"></span></p>
+    </div>
 </main>
 </body>
 </html>
