@@ -1,55 +1,54 @@
 package com.cubowbot.cubow;
 
 import com.cubowbot.cubow.commands.CommandList;
-import com.cubowbot.cubow.handler.*;
-import com.cubowbot.cubow.listener.*;
+import com.cubowbot.cubow.handler.BetaHandler;
+import com.cubowbot.cubow.handler.BotHandler;
+import com.cubowbot.cubow.handler.ConfigHandler;
+import com.cubowbot.cubow.handler.ImageHandler;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.entities.Guild;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.OnlineStatus;
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.requests.GatewayIntent;
-import net.dv8tion.jda.api.utils.ChunkingFilter;
-import net.dv8tion.jda.api.utils.MemberCachePolicy;
-import net.dv8tion.jda.api.utils.cache.CacheFlag;
-
-import java.io.IOException;
-import java.util.EnumSet;
 import java.util.List;
 
 @SpringBootApplication
 public class CubowApplication {
 
 	private static JDA bot;
+	private static final Logger logger = LoggerFactory.getLogger(CubowApplication.class);
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) {
 
-		System.out.println("Starting Server...");
+		logger.info("Starting Server...");
 
 		// Start Spring Server
 		SpringApplication.run(CubowApplication.class, args);
 
-		System.out.println("\nServer started\n");
+		logger.info("\nServer started\n");
 
-		System.out.println("Starting Bot...");
+		logger.info("Starting Bot...");
 
 		ConfigHandler configHandler = new ConfigHandler();
 
-		System.out.println("Checking Configs...");
+		logger.info("Checking Configs...");
+		configHandler.checkConfigs();
 
 		BotHandler botHandler = new BotHandler();
+		BetaHandler betaHandler = new BetaHandler();
 		JDABuilder builder = botHandler.build();
 
 		bot = builder.build();
 
 		try {
 			bot.awaitReady();
-			System.out.println("Bot Online!");
-			System.out.println(" ");
+			logger.info("Bot Online!");
+			logger.info(" ");
 		} catch (Exception e) {
-			System.out.println("Error_ " + e);
+			logger.info("Error_ " + e);
 			System.exit(0);
 		}
 
@@ -61,7 +60,7 @@ public class CubowApplication {
 		botHandler.initializeActivity(bot);
 
 		List<Guild> guilds = bot.getGuilds();
-		System.out.println("Bot is currently active in " + guilds.size() + " guilds.");
+		logger.info("Bot is currently active in " + guilds.size() + " guilds.");
 
 		botHandler.start();
 
@@ -69,7 +68,10 @@ public class CubowApplication {
 		CommandList commandList = new CommandList();
 		commandList.loadCommands(bot);
 
-		System.out.println("Done! Bot Ready");
+		logger.info("Sending Beta Message...");
+		betaHandler.sendBetaMessage();
+
+		logger.info("Done! Bot Ready\n\n");
 
 	}
 

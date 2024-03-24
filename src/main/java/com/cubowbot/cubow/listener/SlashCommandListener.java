@@ -1,16 +1,20 @@
 package com.cubowbot.cubow.listener;
 
+import com.cubowbot.cubow.CubowApplication;
 import com.cubowbot.cubow.handler.*;
 
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SlashCommandListener extends ListenerAdapter {
+    private static final Logger logger = LoggerFactory.getLogger(SlashCommandListener.class);
 
     @Override
     public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
 
-        System.out.println("\nExecuting Slash Command " + event.getName()
+        logger.info("\nExecuting Slash Command " + event.getName()
                 + " for user " + event.getMember().getEffectiveName()
                 + " on server " + event.getGuild().getName());
 

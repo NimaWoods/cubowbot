@@ -1,12 +1,16 @@
 package com.cubowbot.cubow.generator;
 
+import com.cubowbot.cubow.CubowApplication;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.awt.*;
 
 public class EmbedGenerator {
+    private static final Logger logger = LoggerFactory.getLogger(EmbedGenerator.class);
     public void buildEmbed(
             SlashCommandInteractionEvent event,
             Guild server,
@@ -22,7 +26,7 @@ public class EmbedGenerator {
 
         EmbedBuilder embedBuilder = new EmbedBuilder();
 
-        System.out.println("Building Embed on Server " + server.getName() + "...");
+        logger.info("Building Embed on Server " + server.getName() + "...");
         if (title!= null) {
             if (titlelink != null) {
                 embedBuilder.setTitle(title, titlelink);

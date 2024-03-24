@@ -1,13 +1,17 @@
 package com.cubowbot.cubow.commands;
 
+import com.cubowbot.cubow.CubowApplication;
 import com.cubowbot.cubow.commands.CommandLists.*;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CommandList {
+    private static final Logger logger = LoggerFactory.getLogger(CommandList.class);
     public void loadCommands(JDA bot) {
 
         CommandLoader commandLoader = new CommandLoader();
@@ -48,7 +52,7 @@ public class CommandList {
         commandList.addAll(contextCommands.loadList());
         commandList.addAll(feedbackCommands.loadList());
 
-        System.out.println(" ");
+        logger.info(" ");
 
         // Load all commands
         commandLoader.loadCommands(commandList, bot);

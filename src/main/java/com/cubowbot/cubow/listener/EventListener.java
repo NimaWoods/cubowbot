@@ -1,5 +1,6 @@
 package com.cubowbot.cubow.listener;
 
+import com.cubowbot.cubow.CubowApplication;
 import com.cubowbot.cubow.handler.ConfigHandler;
 import com.cubowbot.cubow.handler.WelcomeHandler;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -7,12 +8,16 @@ import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.channel.ChannelDeleteEvent;
 import net.dv8tion.jda.api.events.guild.GuildBanEvent;
+import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.OffsetDateTime;
 
 public class EventListener extends ListenerAdapter {
+    private static final Logger logger = LoggerFactory.getLogger(EventListener.class);
 
     @Override
     public void onGuildMemberJoin(GuildMemberJoinEvent event) {
@@ -22,7 +27,7 @@ public class EventListener extends ListenerAdapter {
         if (role != null) {
             guild.addRoleToMember(event.getMember(), role).queue();
         } else {
-            System.out.println("Role not found");
+            logger.info("Role not found");
         }
 
         WelcomeHandler welcomeHandler = new WelcomeHandler();
@@ -53,5 +58,10 @@ public class EventListener extends ListenerAdapter {
         eb.addField("Ban Time", banTime.toString(), true);
 
         channel.sendMessageEmbeds(eb.build()).queue();
+    }
+
+    @Override
+    public void onGuildJoin(GuildJoinEvent event) {
+        event.getGuild().leave();
     }
 }

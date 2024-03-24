@@ -1,5 +1,6 @@
 package com.cubowbot.cubow.handler;
 
+import com.cubowbot.cubow.CubowApplication;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -15,6 +16,8 @@ import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
 import net.dv8tion.jda.api.entities.channel.unions.GuildChannelUnion;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.awt.Color;
 import java.nio.file.Files;
@@ -25,6 +28,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class EmbedHandler {
+    private static final Logger logger = LoggerFactory.getLogger(EmbedHandler.class);
 
     private final SlashCommandInteractionEvent event;
 
@@ -80,7 +84,7 @@ public class EmbedHandler {
                 if (relatedHex != null) {
                     awtColor = Color.decode(relatedHex);
                 } else {
-                    System.out.println("Color not found in the JSON file.");
+                    logger.info("Color not found in the JSON file.");
                 }
 
             } catch (Exception e) {
@@ -173,7 +177,7 @@ public class EmbedHandler {
                         if (relatedHex != null) {
                             awtColor = Color.decode(relatedHex);
                         } else {
-                            System.out.println("Color not found in the JSON file.");
+                            logger.info("Color not found in the JSON file.");
                         }
 
                     } catch (Exception e) {

@@ -4,11 +4,14 @@ import com.cubowbot.cubow.CubowApplication;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.util.Properties;
 
 public class ConfigHandler {
+    private static final Logger logger = LoggerFactory.getLogger(ConfigHandler.class);
 
     public String loadToken() throws IOException {
         String result = null;
@@ -94,7 +97,7 @@ public class ConfigHandler {
                     while ((length = inputStream.read(buffer)) > 0) {
                         outputStream.write(buffer, 0, length);
                     }
-                    System.out.println("Copied " + fileName + " from resources.");
+                    logger.info("Copied " + fileName + " from resources.");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

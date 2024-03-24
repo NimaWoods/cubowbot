@@ -1,5 +1,6 @@
 package com.cubowbot.cubow.listener;
 
+import com.cubowbot.cubow.CubowApplication;
 import com.cubowbot.cubow.handler.ChatGPTHandler;
 import com.cubowbot.cubow.handler.TicketHandler;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -9,15 +10,18 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.interaction.command.MessageContextInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.awt.*;
 import java.util.concurrent.TimeUnit;
 
 public class ContextMenuListener extends ListenerAdapter {
+    private static final Logger logger = LoggerFactory.getLogger(ContextMenuListener.class);
     @Override
     public void onMessageContextInteraction(MessageContextInteractionEvent event) {
 
-        System.out.println(event.getName() + " " + event.getType() + " " + event.getMember().getEffectiveName());
+        logger.info(event.getName() + " " + event.getType() + " " + event.getMember().getEffectiveName());
 
             if (event.getName().equals("Ticket erstellen")) {
 
@@ -43,7 +47,7 @@ public class ContextMenuListener extends ListenerAdapter {
 
                 Message target = event.getTarget();
                 String context = target.getContentRaw();
-                System.out.println(context);
+                logger.info(context);
 
                 event.deferReply()
                         .setEphemeral(true)
@@ -64,7 +68,7 @@ public class ContextMenuListener extends ListenerAdapter {
                 event.getHook().editOriginalEmbeds(eb.build()).queue();
 
             } else {
-                System.out.println("Command" + event.getName() + "not found");
+                logger.info("Command" + event.getName() + "not found");
             }
         }
 

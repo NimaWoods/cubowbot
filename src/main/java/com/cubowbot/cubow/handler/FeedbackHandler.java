@@ -1,11 +1,14 @@
 package com.cubowbot.cubow.handler;
 
+import com.cubowbot.cubow.CubowApplication;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.awt.Color;
 import java.io.IOException;
@@ -14,6 +17,7 @@ import java.util.Objects;
 
 public class FeedbackHandler {
 
+    private static final Logger logger = LoggerFactory.getLogger(FeedbackHandler.class);
     private final SlashCommandInteractionEvent event;
 
     public FeedbackHandler(SlashCommandInteractionEvent event) {
@@ -42,7 +46,7 @@ public class FeedbackHandler {
 
         RequestBody requestBody = RequestBody.create(json, MediaType.parse("application/json"));
 
-        System.out.println(requestBody.toString());
+        logger.info(requestBody.toString());
 
         Request request = new Request.Builder()
                 .url("https://api.codecks.io/user-report/v1/create-report?token=rt_qLe9UjUvXCSLnZWi8huRtfCs")
@@ -61,7 +65,7 @@ public class FeedbackHandler {
 
                 event.replyEmbeds(embedBuilder.build()).setEphemeral(true).queue();
             } else {
-                System.out.println("Request failed: " + response.code() + " - " + response.message());
+                logger.info("Request failed: " + response.code() + " - " + response.message());
                 event.reply("Something went wrong :/")
                         .setEphemeral(true)
                         .queue();
@@ -91,11 +95,11 @@ public class FeedbackHandler {
                 "\\n\\nFrom Server: " + event.getGuild().getName() + " with ID " + event.getGuild().getId() +
                 "\", \"severity\": \"high\"}";
 
-        System.out.println(json);
+        logger.info(json);
 
         RequestBody requestBody = RequestBody.create(json, MediaType.parse("application/json"));
 
-        System.out.println(requestBody.toString());
+        logger.info(requestBody.toString());
 
         Request request = new Request.Builder()
                 .url("https://api.codecks.io/user-report/v1/create-report?token=rt_NWIJ7raAtKB4YDDOtWo6Im7O")
@@ -114,7 +118,7 @@ public class FeedbackHandler {
 
                 event.replyEmbeds(embedBuilder.build()).setEphemeral(true).queue();
             } else {
-                System.out.println("Request failed: " + response.code() + " - " + response.message());
+                logger.info("Request failed: " + response.code() + " - " + response.message());
                 event.reply("Something went wrong :/")
                         .setEphemeral(true)
                         .queue();

@@ -1,10 +1,13 @@
 package com.cubowbot.cubow.handler;
 
+import com.cubowbot.cubow.CubowApplication;
 import com.cubowbot.cubow.generator.ImageGenerator;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.awt.*;
 import java.io.IOException;
@@ -12,11 +15,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class WelcomeHandler {
+    private static final Logger logger = LoggerFactory.getLogger(WelcomeHandler.class);
     public void sendWelcomingMessage(GuildMemberJoinEvent event) {
         try {
             Guild guild = event.getGuild();
 
-            System.out.println(event.getMember() + " joined to the server!");
+            logger.info(event.getMember() + " joined to the server!");
 
             // Send welcome message as an Embed to the specified channel
             ConfigHandler configHandler = new ConfigHandler();
@@ -39,7 +43,7 @@ public class WelcomeHandler {
                 welcomeChannel.sendMessageEmbeds(embed.build()).queue();
 
             } else {
-                System.out.println("Welcome channel not found");
+                logger.info("Welcome channel not found");
             }
         } catch (IOException e) {
             throw new RuntimeException(e);

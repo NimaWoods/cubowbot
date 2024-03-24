@@ -1,5 +1,6 @@
 package com.cubowbot.cubow.handler;
 
+import com.cubowbot.cubow.CubowApplication;
 import com.cubowbot.cubow.listener.ContextMenuListener;
 import com.cubowbot.cubow.listener.EventListener;
 import com.cubowbot.cubow.listener.ModalListener;
@@ -12,6 +13,8 @@ import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,13 +22,14 @@ import java.io.InputStreamReader;
 import java.util.EnumSet;
 
 public class BotHandler extends Thread {
+    private static final Logger logger = LoggerFactory.getLogger(BotHandler.class);
 
     ConfigHandler configHandler = new ConfigHandler();
 
     public JDABuilder build() {
-        System.out.println("Building JDA...");
+        logger.info("Building JDA...");
 
-        System.out.println("Retrieving Token...");
+        logger.info("Retrieving Token...");
         String token = null;
 
         configHandler.checkConfigs();
@@ -47,29 +51,29 @@ public class BotHandler extends Thread {
 
 
         // Load Event Listener
-        System.out.println("\nLoading Event Listener...");
+        logger.info("\nLoading Event Listener...");
 
-        System.out.print("slashCommandListener");
+        logger.info("slashCommandListener");
         builder.addEventListeners(slashCommandListener);
         System.out.print(" -> LOADED\n");
 
-        System.out.print("eventListener");
+        logger.info("eventListener");
         builder.addEventListeners(eventListener);
         System.out.print(" -> LOADED\n");
 
-        System.out.print("buttonHandler");
+        logger.info("buttonHandler");
         builder.addEventListeners(buttonHandler);
         System.out.print(" -> LOADED\n");
 
-        System.out.print("autoCompleteHandler");
+        logger.info("autoCompleteHandler");
         builder.addEventListeners(autoCompleteHandler);
         System.out.print(" -> LOADED\n");
 
-        System.out.print("modalListener");
+        logger.info("modalListener");
         builder.addEventListeners(modalListener);
         System.out.print(" -> LOADED\n");
 
-        System.out.print("contextMenuListener");
+        logger.info("contextMenuListener");
         builder.addEventListeners(contextMenuListener);
         System.out.print(" -> LOADED\n");
 
@@ -96,7 +100,7 @@ public class BotHandler extends Thread {
             while((line = reader.readLine()) != null) {
     
                 if(line.equalsIgnoreCase("exit")) {
-                    System.out.println("System Exit..");
+                    logger.info("System Exit..");
                     System.exit(0);
                 }
 
@@ -124,18 +128,18 @@ public class BotHandler extends Thread {
 
                         // Überprüfen Sie den Exit-Code
                         if (exitCode == 0) {
-                            System.out.println("Application restarted successfully");
+                            logger.info("Application restarted successfully");
                             // Beenden Sie die aktuelle Anwendung
                             System.exit(0);
                         } else {
-                            System.out.println("Application restart failed with exit code: " + exitCode);
+                            logger.info("Application restart failed with exit code: " + exitCode);
                         }
                     } catch (IOException e) {
-                        System.out.println("Error restarting application: " + e.getMessage());
+                        logger.info("Error restarting application: " + e.getMessage());
                     } catch (InterruptedException e) {
                         // Handle the InterruptedException
                         Thread.currentThread().interrupt(); // Preserve interrupt status
-                        System.out.println("Application restart interrupted");
+                        logger.info("Application restart interrupted");
                     }
                 }
             }
@@ -172,7 +176,7 @@ public class BotHandler extends Thread {
 
         public static void main(String[] args) {
             try {
-                System.out.println("Initiating restart...");
+                logger.info("Initiating restart...");
                 Runtime.getRuntime().exec("./start_bot.sh");
                 System.exit(0);
 

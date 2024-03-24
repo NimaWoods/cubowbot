@@ -9,6 +9,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import com.cubowbot.cubow.CubowApplication;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
@@ -18,10 +19,13 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class GiveawayHandler {
 
     private final SlashCommandInteractionEvent event;
+    private static final Logger logger = LoggerFactory.getLogger(GiveawayHandler.class);
 
     public GiveawayHandler(SlashCommandInteractionEvent event) {
         this.event = event;
@@ -141,9 +145,9 @@ public class GiveawayHandler {
             java.nio.file.Path filePath = Paths.get("users.json");
             boolean isDeleted = Files.deleteIfExists(filePath);
             if (isDeleted) {
-                System.out.println("File deleted successfully");
+                logger.info("File deleted successfully");
             } else {
-                System.out.println("File does not exist");
+                logger.info("File does not exist");
             }
         } catch (Exception e) {
             e.printStackTrace();

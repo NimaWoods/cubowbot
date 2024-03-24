@@ -1,8 +1,11 @@
 package com.cubowbot.cubow.handler;
 
+import com.cubowbot.cubow.CubowApplication;
 import io.github.artemnefedov.javaai.exception.JavaAIException;
 import io.github.artemnefedov.javaai.service.JavaAI;
 import net.dv8tion.jda.api.entities.Guild;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,6 +17,7 @@ import java.net.URL;
 import static io.github.artemnefedov.javaai.service.JavaAI.javaAiBuilder;
 
 public class ChatGPTHandler {
+    private static final Logger logger = LoggerFactory.getLogger(ChatGPTHandler.class);
 
     public String generateText(String message, Guild server) {
 
@@ -29,7 +33,7 @@ public class ChatGPTHandler {
 
                 // Switch to a different model and retry
                 String fallbackModel = "gpt-3.5-turbo-0125";
-                System.out.println("Rate limit exceeded. Switching to model: " + fallbackModel);
+                logger.info("Rate limit exceeded. Switching to model: " + fallbackModel);
 
                 try {
                     return makeRequest(url, apikey, fallbackModel, message, server);

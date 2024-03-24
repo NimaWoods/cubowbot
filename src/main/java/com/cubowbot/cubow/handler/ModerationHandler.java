@@ -1,5 +1,6 @@
 package com.cubowbot.cubow.handler;
 
+import com.cubowbot.cubow.CubowApplication;
 import com.cubowbot.cubow.generator.EmbedGenerator;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
@@ -11,6 +12,8 @@ import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.awt.Color;
 import java.io.ObjectInputFilter.Config;
@@ -27,6 +30,7 @@ import java.util.concurrent.TimeUnit;
 public class ModerationHandler {
 
     private final SlashCommandInteractionEvent event;
+    private static final Logger logger = LoggerFactory.getLogger(ModerationHandler.class);
 
     public ModerationHandler(SlashCommandInteractionEvent event) {
         this.event = event;
@@ -183,7 +187,7 @@ public class ModerationHandler {
                 channel.sendMessage(role.getAsMention()).queue();
             } else {
                 // Handle the case where a role with the given ID doesn't exist
-                System.out.println("Role with ID " + roleId + " not found.");
+                logger.info("Role with ID " + roleId + " not found.");
             }
         }
 
@@ -194,7 +198,7 @@ public class ModerationHandler {
         eb.setColor(Color.GREEN);
 
         event.replyEmbeds(eb.build()).setEphemeral(true).queue();
-        System.out.println(channel.getName());
+        logger.info(channel.getName());
     }
 
     public boolean isUrl(String url){

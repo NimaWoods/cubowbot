@@ -3,6 +3,7 @@ package com.cubowbot.cubow.handler;
 import java.awt.Color;
 import java.util.*;
 
+import com.cubowbot.cubow.CubowApplication;
 import com.cubowbot.cubow.generator.EmbedGenerator;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
@@ -17,12 +18,15 @@ import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import net.dv8tion.jda.api.requests.restaction.ChannelAction;
 import net.dv8tion.jda.api.requests.restaction.MessageCreateAction;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.*;
 
 public class TicketHandler {
 
     private SlashCommandInteractionEvent event;
+    private static final Logger logger = LoggerFactory.getLogger(TicketHandler.class);
 
     public TicketHandler() {
     }
@@ -64,7 +68,7 @@ public class TicketHandler {
             event.reply("success").setEphemeral(true).queue();
 
         } else {
-            System.out.println("Channel " + channelId + " not found");
+            logger.info("Channel " + channelId + " not found");
         }
     }
 
@@ -80,7 +84,7 @@ public class TicketHandler {
             TextChannel channel = event.getChannel().asTextChannel();
 
             if (member != null) {
-                System.out.println("Adding member " + member.getNickname() + " to Channel" + channel);
+                logger.info("Adding member " + member.getNickname() + " to Channel" + channel);
                 channel.getManager().putMemberPermissionOverride(member.getIdLong(), perm, null).queue(
                         success -> {
                             EmbedBuilder successEmbed = new EmbedBuilder();
@@ -133,7 +137,7 @@ public class TicketHandler {
         if(event.getChannel().getType().toString().equals("TextChannel")) {
             toTranscript(event.getChannel().asTextChannel(), event.getGuild());
         } else {
-            System.out.println("[Close Ticket] Channel " + event.getChannel() + " is not an TextChannel");
+            logger.info("[Close Ticket] Channel " + event.getChannel() + " is not an TextChannel");
         }
 
         event.getChannel().delete().queueAfter(5, TimeUnit.SECONDS);
@@ -154,12 +158,12 @@ public class TicketHandler {
                 net.dv8tion.jda.api.entities.PermissionOverride permissionOverride = channel.getPermissionOverride(role);
                 if (permissionOverride != null) {
 
-                    System.out.println(member.getNickname() + " claimed " + channel.getName());
+                    logger.info(member.getNickname() + " claimed " + channel.getName());
 
-                    System.out.println("Adding member " + member.getNickname() + " to Channel" + channel);
+                    logger.info("Adding member " + member.getNickname() + " to Channel" + channel);
                     channel.getManager().putMemberPermissionOverride(memberID, perm, null).queue(
                             success -> {
-                                System.out.println("Removing permissions for role " + role.getName() + " from Channel " + channel);
+                                logger.info("Removing permissions for role " + role.getName() + " from Channel " + channel);
                                 channel.getManager().removePermissionOverride(role.getIdLong()).queue(
                                         successRole -> {
                                             EmbedBuilder eb = new EmbedBuilder();
@@ -216,10 +220,10 @@ public class TicketHandler {
 
                 net.dv8tion.jda.api.entities.PermissionOverride permissionOverride = channel.getPermissionOverride(role);
                 if (permissionOverride == null) {
-                    System.out.println("Adding member " + transMember.getEffectiveName() + " to Channel" + channel);
+                    logger.info("Adding member " + transMember.getEffectiveName() + " to Channel" + channel);
                     channel.getManager().putMemberPermissionOverride(transMember.getIdLong(), perm, null).queue(
                             success -> {
-                                System.out.println("Removing permissions for Member " + member.getEffectiveName() + " from Channel " + channel);
+                                logger.info("Removing permissions for Member " + member.getEffectiveName() + " from Channel " + channel);
                                 channel.getManager().removePermissionOverride(member.getIdLong()).queue(
                                         successAdd -> {
                                             EmbedBuilder eb = new EmbedBuilder();
@@ -277,12 +281,12 @@ public class TicketHandler {
                 net.dv8tion.jda.api.entities.PermissionOverride permissionOverride = channel.getPermissionOverride(role);
                 if (permissionOverride == null) {
 
-                    System.out.println(member.getNickname() + " unclaimed " + channel.getName());
-                    System.out.println("Adding member " + member.getNickname() + " to Channel" + channel);
+                    logger.info(member.getNickname() + " unclaimed " + channel.getName());
+                    logger.info("Adding member " + member.getNickname() + " to Channel" + channel);
 
                     channel.getManager().removePermissionOverride(memberID).queue(
                             success -> {
-                                System.out.println("Removing permissions for role " + role.getName() + " from Channel " + channel);
+                                logger.info("Removing permissions for role " + role.getName() + " from Channel " + channel);
                                 channel.getManager().putRolePermissionOverride(role.getIdLong(), perm, null).queue(
                                         successRole -> {
                                             EmbedBuilder eb = new EmbedBuilder();
@@ -290,7 +294,7 @@ public class TicketHandler {
                                             eb.setColor(Color.GREEN);
                                             eb.setDescription("Ticket unclaimed by " + member.getAsMention());
                                             event.getHook().editOriginalEmbeds(eb.build()).queue();
-                                            System.out.println("Ticket unclaimed by " + member.getAsMention());
+                                            logger.info("Ticket unclaimed by " + member.getAsMention());
                                         },
                                         failureRole -> {
                                             EmbedBuilder eb = new EmbedBuilder();

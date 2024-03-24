@@ -10,6 +10,7 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import com.cubowbot.cubow.CubowApplication;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.entities.channel.Channel;
 import org.json.JSONArray;
@@ -22,8 +23,11 @@ import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ButtonHandler extends ListenerAdapter{
+    private static final Logger logger = LoggerFactory.getLogger(ButtonHandler.class);
     
     @Override
     public void onButtonInteraction(ButtonInteractionEvent event) {
@@ -56,7 +60,6 @@ public class ButtonHandler extends ListenerAdapter{
         }
 
         else if (event.getComponentId().equals("closerequestno")) {
-            System.out.println("Test");
             EmbedBuilder eb = new EmbedBuilder();
 
             MessageEmbed embed = event.getMessage().getEmbeds().get(0);
@@ -87,12 +90,12 @@ public class ButtonHandler extends ListenerAdapter{
                         net.dv8tion.jda.api.entities.PermissionOverride permissionOverride = channel.getPermissionOverride(role);
                         if (permissionOverride != null) {
 
-                            System.out.println(member.getNickname() + " claimed " + channel.getName());
+                            logger.info(member.getNickname() + " claimed " + channel.getName());
 
-                            System.out.println("Adding member " + member.getNickname() + " to Channel" + channel);
+                            logger.info("Adding member " + member.getNickname() + " to Channel" + channel);
                             channel.getManager().putMemberPermissionOverride(memberID, perm, null).queue(
                                 success -> {
-                                    System.out.println("Removing permissions for role " + role.getName() + " from Channel " + channel);
+                                    logger.info("Removing permissions for role " + role.getName() + " from Channel " + channel);
                                     channel.getManager().removePermissionOverride(role.getIdLong()).queue(  
                                         successRole -> {
                                             EmbedBuilder eb = new EmbedBuilder();
@@ -149,12 +152,12 @@ public class ButtonHandler extends ListenerAdapter{
                         net.dv8tion.jda.api.entities.PermissionOverride permissionOverride = channel.getPermissionOverride(role);
                         if (permissionOverride == null) {
 
-                            System.out.println(member.getNickname() + " unclaimed " + channel.getName());
-                            System.out.println("Adding member " + member.getNickname() + " to Channel" + channel);
+                            logger.info(member.getNickname() + " unclaimed " + channel.getName());
+                            logger.info("Adding member " + member.getNickname() + " to Channel" + channel);
 
                             channel.getManager().removePermissionOverride(memberID).queue(
                                 success -> {
-                                    System.out.println("Removing permissions for role " + role.getName() + " from Channel " + channel);
+                                    logger.info("Removing permissions for role " + role.getName() + " from Channel " + channel);
                                     channel.getManager().putRolePermissionOverride(role.getIdLong(), perm, null).queue(  
                                         successRole -> {
                                             EmbedBuilder eb = new EmbedBuilder();
@@ -162,7 +165,7 @@ public class ButtonHandler extends ListenerAdapter{
                                             eb.setColor(Color.GREEN);
                                             eb.setDescription("Ticket unclaimed by " + member.getAsMention());
                                             event.getHook().editOriginalEmbeds(eb.build()).queue();
-                                            System.out.println("Ticket unclaimed by" + member.getAsMention());
+                                            logger.info("Ticket unclaimed by" + member.getAsMention());
 
                                             Button close = Button.primary("closeTicket", "Ticket schließen");
                                             Button claim = Button.primary("claim", "Claim Ticket");

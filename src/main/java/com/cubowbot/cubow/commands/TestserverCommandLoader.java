@@ -6,11 +6,14 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.internal.interactions.CommandDataImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class TestserverCommandLoader {
+    private static final Logger logger = LoggerFactory.getLogger(TestserverCommandLoader.class);
     public void loadCommands() {
         CubowApplication cubowApplication = new CubowApplication();
         JDA bot = cubowApplication.getJDA();
@@ -31,8 +34,8 @@ public class TestserverCommandLoader {
         // Activate while Debugging by changing false to true
         if (false) {
             Testserver.updateCommands().addCommands(commandList).queue(
-                    success -> System.out.println("Registered all commands on Testserver " + Testserver.getName()),
-                    failure -> System.out.println("Failed to register commands on Testserver..." + failure)
+                    success -> logger.info("Registered all commands on Testserver " + Testserver.getName()),
+                    failure -> logger.info("Failed to register commands on Testserver..." + failure)
             );
         }
     }

@@ -1,9 +1,12 @@
 package com.cubowbot.cubow.handler;
 
+import com.cubowbot.cubow.CubowApplication;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.net.URL;
@@ -11,17 +14,18 @@ import java.nio.file.*;
 import java.util.List;
 
 public class ImageHandler {
+    private static final Logger logger = LoggerFactory.getLogger(ImageHandler.class);
     public void downloadWelcomeImage(JDA bot) {
         try {
             Guild guild = bot.getGuildById("1052647405616644216");
             if (guild == null) {
-                System.out.println("Guild not found.");
+                logger.info("Guild not found.");
                 return;
             }
 
             TextChannel channel = guild.getTextChannelById("1116302198113062963");
             if (channel == null) {
-                System.out.println("Channel not found.");
+                logger.info("Channel not found.");
                 return;
             }
 
@@ -38,15 +42,15 @@ public class ImageHandler {
                                 try {
                                     // The downloadImage method should be defined to handle the download
                                     downloadImage(attachment.getUrl(), destinationFile);
-                                    System.out.println("Welcome Image downloaded successfully.");
+                                    logger.info("Welcome Image downloaded successfully.");
                                 } catch (IOException e) {
-                                    System.out.println("Error downloading Welcome image: " + e.getMessage());
+                                    logger.info("Error downloading Welcome image: " + e.getMessage());
                                 }
                             }
                         });
             });
         } catch (Exception e) {
-            System.out.println("Error downloading Welcome image: " + e.getMessage());
+            logger.info("Error downloading Welcome image: " + e.getMessage());
         }
     }
 
