@@ -11,8 +11,10 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import com.cubowbot.cubow.CubowApplication;
+import com.mongodb.client.MongoCollection;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.entities.channel.Channel;
+import org.bson.Document;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -233,8 +235,10 @@ public class ButtonHandler extends ListenerAdapter{
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else if(event.getComponentId().equals("whitelistCheck")) {
-
+        } else if(event.getComponentId().equals("betajoin")) {
+            BetaHandler betaHandler = new BetaHandler();
+            betaHandler.memberJoinedBeta(event);
         }
+
     }  
 }

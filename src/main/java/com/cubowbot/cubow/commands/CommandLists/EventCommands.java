@@ -8,13 +8,10 @@ import java.util.List;
 public class EventCommands {
     public List<CommandData> loadList() {
 
-        List<CommandData> commandList = Arrays.asList(
-
-                // TODO new CommandDataImpl("createevent", "Creates an Discord event")
-                //.addOption(OptionType.STRING, "eventname", "Event Name", true)
-                //.addOption(OptionType.STRING, "eventbeschreibung","Event Beschreibung", true)
-
-        );
+        // TODO new CommandDataImpl("createevent", "Creates an Discord event")
+        //.addOption(OptionType.STRING, "eventname", "Event Name", true)
+        //.addOption(OptionType.STRING, "eventbeschreibung","Event Beschreibung", true)
+        List<CommandData> commandList = List.of();
 
         return commandList;
     }

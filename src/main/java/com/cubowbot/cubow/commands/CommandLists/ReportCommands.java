@@ -10,7 +10,7 @@ import java.util.List;
 public class ReportCommands {
     public List<CommandData> loadList() {
 
-        List<CommandData> commandList = Arrays.asList(
+        List<CommandData> commandList = List.of(
 
                 new CommandDataImpl("report", "Report a member")
                         .addOption(OptionType.USER, "user", "User to report", true)

@@ -131,7 +131,7 @@ public class ModerationHandler {
                         .queue();
                 channel.sendMessage("Channel unlocked.").queue();
             }
-        }, minutes * 60 * 1000);
+        }, (long) minutes * 60 * 1000);
     }
 
     public void unban() {
@@ -159,7 +159,7 @@ public class ModerationHandler {
 
         String reportChannel = null;
 
-        reportChannel = configHandler.getServerConfig(event.getGuild().getId(), "Report_Notification_Channel");
+        reportChannel = ConfigHandler.getServerConfig(event.getGuild().getId(), "Report_Notification_Channel");
 
         EmbedBuilder eb = new EmbedBuilder();
         eb.setTitle("Report von " + event.getMember().getEffectiveName());
@@ -178,8 +178,8 @@ public class ModerationHandler {
 
         TextChannel channel = event.getGuild().getTextChannelById(reportChannel);
 
-        String modRoleIDsString = configHandler.getServerConfig(event.getGuild().getId(), "Moderation_Roles");
-        List<String> modRoleIDs = Arrays.asList(modRoleIDsString.split(","));
+        String modRoleIDsString = ConfigHandler.getServerConfig(event.getGuild().getId(), "Moderation_Roles");
+        String[] modRoleIDs = modRoleIDsString.split(",");
 
         for (String roleId : modRoleIDs) {
             Role role = event.getGuild().getRoleById(roleId);

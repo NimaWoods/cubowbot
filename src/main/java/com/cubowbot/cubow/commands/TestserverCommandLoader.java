@@ -20,15 +20,14 @@ public class TestserverCommandLoader {
 
         Guild Testserver = bot.getGuildById("1217994812108832880");
 
-        List<CommandData> commandList = Arrays.asList(
+        List<CommandData> commandList = List.of(
 
                 new CommandDataImpl("suggest", "suggest a feature for Cubow")
                         .addOption(OptionType.STRING, "title", "Bug title", true)
                         .addOption(OptionType.STRING, "description", "Bug description", true)
                         .addOption(OptionType.ATTACHMENT, "file", "Attachment", false)
                         .addOption(OptionType.STRING, "link", "Server invite Link for testing", false)
-
-                );
+        );
 
         // Testserver
         // Activate while Debugging by changing false to true

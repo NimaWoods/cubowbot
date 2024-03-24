@@ -10,7 +10,7 @@ import java.util.List;
 public class BotCommands {
     public List<CommandData> loadList() {
 
-        List<CommandData> commandList = Arrays.asList(
+        List<CommandData> commandList = List.of(
 
                 new CommandDataImpl("bug", "Reports an Bug")
                         .addOption(OptionType.STRING, "Beschreibung", "Erkläre den Fehler so genau wie möglich")

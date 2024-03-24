@@ -10,7 +10,7 @@ import java.util.List;
 public class MusicCommands {
     public List<CommandData> loadList() {
 
-        List<CommandData> commandList = Arrays.asList(
+        List<CommandData> commandList = List.of(
 
                 new CommandDataImpl("play", "Play a Song")
                         .addOption(OptionType.STRING, "link", "The song to play (youtube link/name)", true)

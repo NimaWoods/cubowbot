@@ -10,7 +10,7 @@ import java.util.List;
 public class GiveawayCommands {
     public List<CommandData> loadList() {
 
-        List<CommandData> commandList = Arrays.asList(
+        List<CommandData> commandList = List.of(
 
                 new CommandDataImpl("creategiveaway", "creates a new giveaway")
                         .addOption(OptionType.STRING, "gewinn", "Giveaway Gewinn", true)

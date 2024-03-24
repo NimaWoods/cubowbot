@@ -81,7 +81,7 @@ public class ChatGPTHandler {
 
         ConfigHandler configHandler = new ConfigHandler();
 
-        String token = configHandler.getServerConfig(server.getId(), "ChatGPT_API_Token");
+        String token = ConfigHandler.getServerConfig(server.getId(), "ChatGPT_API_Token");
 
         try {
             JavaAI javaAI = javaAiBuilder(token);

@@ -49,7 +49,7 @@ public class GiveawayHandler {
         long delay = seconds * 1000L + minutes * 60000L + hours * 3600000L + days * 86400000L;
 
         // Calculate the total seconds for the timestamp
-        long totalSeconds = seconds + (minutes * 60) + (hours * 3600) + (days * 86400);
+        long totalSeconds = seconds + (minutes * 60L) + (hours * 3600L) + (days * 86400L);
 
         // Get the current time and add the total seconds to get the future timestamp
         long currentUnixTime = Instant.now().getEpochSecond();

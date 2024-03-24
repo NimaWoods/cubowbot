@@ -103,7 +103,7 @@ public class TicketHandler {
                 );
             }
         } else {
-            event.reply("Not a Ticket Channel").queue();;
+            event.reply("Not a Ticket Channel").queue();
         }
 
     }

@@ -1,10 +1,7 @@
 package com.cubowbot.cubow;
 
 import com.cubowbot.cubow.commands.CommandList;
-import com.cubowbot.cubow.handler.BetaHandler;
-import com.cubowbot.cubow.handler.BotHandler;
-import com.cubowbot.cubow.handler.ConfigHandler;
-import com.cubowbot.cubow.handler.ImageHandler;
+import com.cubowbot.cubow.handler.*;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Guild;
@@ -23,14 +20,19 @@ public class CubowApplication {
 
 	public static void main(String[] args) {
 
-		logger.info("Starting Server...");
 
 		// Start Spring Server
+		logger.info("Starting Server...");
 		SpringApplication.run(CubowApplication.class, args);
-
 		logger.info("\nServer started\n");
 
-		logger.info("Starting Bot...");
+
+		logger.info("Connecting to MongoDB Database...");
+		DataBaseHandler dataBaseHandler = new DataBaseHandler();
+		dataBaseHandler.connect();
+
+		// Connecting Discord Bot
+		logger.info("Connecting Bot JDA...");
 
 		ConfigHandler configHandler = new ConfigHandler();
 
@@ -46,7 +48,7 @@ public class CubowApplication {
 		try {
 			bot.awaitReady();
 			logger.info("Bot Online!");
-			logger.info(" ");
+			System.out.println(" ");
 		} catch (Exception e) {
 			logger.info("Error_ " + e);
 			System.exit(0);
@@ -66,12 +68,10 @@ public class CubowApplication {
 
 		// Load Global Commands
 		CommandList commandList = new CommandList();
-		commandList.loadCommands(bot);
+		commandList.loadCommands();
 
 		logger.info("Sending Beta Message...");
 		betaHandler.sendBetaMessage();
-
-		logger.info("Done! Bot Ready\n\n");
 
 	}
 

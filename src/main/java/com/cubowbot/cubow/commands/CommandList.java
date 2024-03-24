@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommandList {
-    private static final Logger logger = LoggerFactory.getLogger(CommandList.class);
-    public void loadCommands(JDA bot) {
+    private static final Logger logger = LoggerFactory.getLogger(CubowApplication.class);
+    public void loadCommands() {
 
         CommandLoader commandLoader = new CommandLoader();
         TestserverCommandLoader testserverCommandLoader = new TestserverCommandLoader();
@@ -52,10 +52,10 @@ public class CommandList {
         commandList.addAll(contextCommands.loadList());
         commandList.addAll(feedbackCommands.loadList());
 
-        logger.info(" ");
+        System.out.println(" ");
 
         // Load all commands
-        commandLoader.loadCommands(commandList, bot);
+        commandLoader.loadCommands(commandList);
         testserverCommandLoader.loadCommands();
     }
 }

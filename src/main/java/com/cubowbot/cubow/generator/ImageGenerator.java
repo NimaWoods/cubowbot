@@ -17,7 +17,7 @@ public class ImageGenerator {
         ImageHandler.downloadImage(member.getEffectiveAvatarUrl(), "avatar.png");
 
         BufferedImage background = ImageIO.read(new File("welcome.jpg"));
-        BufferedImage profileImage = ImageIO.read(new File(String.valueOf("avatar.png")));
+        BufferedImage profileImage = ImageIO.read(new File("avatar.png"));
 
         // Hintergrund hinuzfügen
         BufferedImage resultImage = new BufferedImage(background.getWidth(), background.getHeight(), BufferedImage.TYPE_INT_RGB);

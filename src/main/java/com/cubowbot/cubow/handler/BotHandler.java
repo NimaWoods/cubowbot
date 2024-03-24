@@ -49,33 +49,26 @@ public class BotHandler extends Thread {
         ModalListener modalListener = new ModalListener();
         ContextMenuListener contextMenuListener = new ContextMenuListener();
 
-
         // Load Event Listener
         logger.info("\nLoading Event Listener...");
 
-        logger.info("slashCommandListener");
         builder.addEventListeners(slashCommandListener);
-        System.out.print(" -> LOADED\n");
+        logger.info("slashCommandListener");
 
-        logger.info("eventListener");
         builder.addEventListeners(eventListener);
-        System.out.print(" -> LOADED\n");
+        logger.info("eventListener");
 
-        logger.info("buttonHandler");
         builder.addEventListeners(buttonHandler);
-        System.out.print(" -> LOADED\n");
+        logger.info("buttonHandler");
 
-        logger.info("autoCompleteHandler");
         builder.addEventListeners(autoCompleteHandler);
-        System.out.print(" -> LOADED\n");
+        logger.info("autoCompleteHandler");
 
-        logger.info("modalListener");
         builder.addEventListeners(modalListener);
-        System.out.print(" -> LOADED\n");
+        logger.info("modalListener");
 
-        logger.info("contextMenuListener");
         builder.addEventListeners(contextMenuListener);
-        System.out.print(" -> LOADED\n");
+        logger.info("contextMenuListener");
 
         System.out.println(" ");
 

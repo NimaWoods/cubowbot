@@ -25,7 +25,7 @@ public class WelcomeHandler {
             // Send welcome message as an Embed to the specified channel
             ConfigHandler configHandler = new ConfigHandler();
 
-            String welcomeID = configHandler.getServerConfig(event.getGuild().getId(), "Welcome_Channel");
+            String welcomeID = ConfigHandler.getServerConfig(event.getGuild().getId(), "Welcome_Channel");
 
             TextChannel welcomeChannel = guild.getTextChannelById(welcomeID);
             if (welcomeChannel != null) {
