@@ -20,7 +20,7 @@ public class DataBaseHandler {
     private MongoClient mongoClient;
 
     public DataBaseHandler() {
-        String uri = "mongodb://localhost:27017/cubowbot";
+        String uri = "mongodb://5.45.109.197:27017/cubowbot";
         MongoClientSettings settings = MongoClientSettings.builder()
                 .applyConnectionString(new ConnectionString(uri))
                 .build();

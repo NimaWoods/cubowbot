@@ -10,11 +10,14 @@ import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
+import org.bson.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.awt.*;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class BetaHandler {
     private static final Logger logger = LoggerFactory.getLogger(BetaHandler.class);
@@ -71,25 +74,40 @@ public class BetaHandler {
         DataBaseHandler dataBaseHandler = new DataBaseHandler();
         EmbedBuilder eb = new EmbedBuilder();
 
-        if (dataBaseHandler.getAllBetaMembers().stream().count() < 10) {
-            dataBaseHandler.saveBetaMember(event.getMember().getId());
-            eb.setTitle("Joined Beta");
-            eb.setDescription("Du wurdest ins Beta Programm aufgenommen und kannst Cubow jetzt einladen!");
-            eb.setColor(Color.MAGENTA);
+        List<Document> betaMembers = dataBaseHandler.getAllBetaMembers();
+        List<String> betaMemberIds = betaMembers.stream()
+                .map(doc -> doc.getString("userID"))
+                .collect(Collectors.toList());
+
+        if(!betaMemberIds.contains(event.getMember().getId())) {
+            if (betaMembers.stream().count() < 20) {
+                dataBaseHandler.saveBetaMember(event.getMember().getId());
+                eb.setTitle("Joined Beta");
+                eb.setDescription("Du wurdest ins Beta Programm aufgenommen und kannst Cubow jetzt einladen!");
+                eb.setColor(Color.MAGENTA);
+
+                event.replyEmbeds(eb.build())
+                        .setEphemeral(true)
+                        .setActionRow(Button.link("https://cubow.nimawoods.de/invite", "Cubow einladen"))
+                        .queue();
+            } else {
+                eb.setTitle("Alle Plätze sind belegt");
+                eb.setDescription("Leider schaffen unsere Server diesen Ansturm nicht und wir müssen upgraden. Wir benachrichtigen dich aber sobald wieder" +
+                        "neue Plätze da sind");
+                eb.setImage("https://i.imgur.com/9jD9bSF.jpg");
+                eb.setColor(Color.MAGENTA);
+
+                event.replyEmbeds(eb.build())
+                        .setEphemeral(true)
+                        .queue();
+            }
+            eb.setTitle("Bereits registriert");
+            eb.setDescription("Du bist bereits registriert");
+            eb.setColor(Color.RED);
 
             event.replyEmbeds(eb.build())
                     .setEphemeral(true)
                     .setActionRow(Button.link("https://cubow.nimawoods.de/invite", "Cubow einladen"))
-                    .queue();
-        } else {
-            eb.setTitle("Alle Plätze sind belegt");
-            eb.setDescription("Leider schaffen unsere Server diesen Ansturm nicht und wir müssen upgraden. Wir benachrichtigen dich aber sobald wieder" +
-                    "neue Plätze da sind");
-            eb.setImage("https://i.imgur.com/9jD9bSF.jpg");
-            eb.setColor(Color.MAGENTA);
-
-            event.replyEmbeds(eb.build())
-                    .setEphemeral(true)
                     .queue();
         }
     }
