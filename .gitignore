@@ -34,4 +34,3 @@ build/
 
 ### properties ###
 /token.properties
-server_configs.json
