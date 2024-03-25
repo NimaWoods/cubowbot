@@ -69,17 +69,29 @@ public class BetaHandler {
 
     public void memberJoinedBeta(ButtonInteractionEvent event ) {
         DataBaseHandler dataBaseHandler = new DataBaseHandler();
-        dataBaseHandler.saveBetaMember(event.getMember().getId());
-
         EmbedBuilder eb = new EmbedBuilder();
-        eb.setTitle("Joined Beta");
-        eb.setDescription("Du wurdest ins Beta Programm aufgenommen und kannst Cubow jetzt einladen!");
-        eb.setColor(Color.MAGENTA);
 
-        event.replyEmbeds(eb.build())
-                .setEphemeral(true)
-                .setActionRow(Button.link("https://cubow.nimawoods.de/invite", "Cubow einladen"))
-                .queue();
+        if (dataBaseHandler.getAllBetaMembers().stream().count() < 10) {
+            dataBaseHandler.saveBetaMember(event.getMember().getId());
+            eb.setTitle("Joined Beta");
+            eb.setDescription("Du wurdest ins Beta Programm aufgenommen und kannst Cubow jetzt einladen!");
+            eb.setColor(Color.MAGENTA);
+
+            event.replyEmbeds(eb.build())
+                    .setEphemeral(true)
+                    .setActionRow(Button.link("https://cubow.nimawoods.de/invite", "Cubow einladen"))
+                    .queue();
+        } else {
+            eb.setTitle("Alle Plätze sind belegt");
+            eb.setDescription("Leider schaffen unsere Server diesen Ansturm nicht und wir müssen upgraden. Wir benachrichtigen dich aber sobald wieder" +
+                    "neue Plätze da sind");
+            eb.setImage("https://i.imgur.com/9jD9bSF.jpg");
+            eb.setColor(Color.MAGENTA);
+
+            event.replyEmbeds(eb.build())
+                    .setEphemeral(true)
+                    .queue();
+        }
     }
 
 }
