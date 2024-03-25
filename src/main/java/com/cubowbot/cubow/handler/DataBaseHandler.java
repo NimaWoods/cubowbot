@@ -45,7 +45,6 @@ public class DataBaseHandler {
             MongoCollection<Document> collection = mongoDatabase.getCollection("data");
             logger.info("Connected to Collection");
 
-            logger.info("Creating Document with Basedata...");
             Document document = new Document("userID", userID)
                     .append("joinedAt", LocalDateTime.now());
 

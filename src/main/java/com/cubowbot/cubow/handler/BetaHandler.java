@@ -78,7 +78,7 @@ public class BetaHandler {
 
         event.replyEmbeds(eb.build())
                 .setEphemeral(true)
-                .setActionRow(Button.link("cubow.nimawoods.de", "Cubow einladen"))
+                .setActionRow(Button.link("https://cubow.nimawoods.de/invite", "Cubow einladen"))
                 .queue();
     }
 
