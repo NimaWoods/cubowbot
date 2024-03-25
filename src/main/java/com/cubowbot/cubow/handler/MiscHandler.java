@@ -96,6 +96,7 @@ public class MiscHandler {
         Integer memberCount = guild.getMemberCount();
         TextChannel rulesChannel = guild.getRulesChannel();
         OffsetDateTime timeCreated = guild.getTimeCreated();
+        guild.getEmojis();
 
         String banner = guild.getBannerUrl();
 
@@ -104,11 +105,12 @@ public class MiscHandler {
         eb.setDescription("**Server:** " + serverName +  //
                 "\n**Server Id:** " + serverId + //
                 "\n**Members:** " + memberCount + //
-                "\n**Rules Channel** "+ rulesChannel + //
-                "**Created:** " + timeCreated);
+                "\n**Rules Channel** "+ rulesChannel.getAsMention() + //
+                "\n**Created:** " + timeCreated);
         eb.setImage(banner);
+        eb.setThumbnail(guild.getIconUrl());
         eb.setColor(Color.MAGENTA);
-        event.replyEmbeds(eb.build()).setEphemeral(true).queue();
+        event.replyEmbeds(eb.build()).queue();
     }
 
 }

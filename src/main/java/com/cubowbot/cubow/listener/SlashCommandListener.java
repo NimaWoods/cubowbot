@@ -158,6 +158,16 @@ public class SlashCommandListener extends ListenerAdapter {
                 break;
 
         }
+
+        // Test Commands
+        // Deactivate if not in use
+        if(true) {
+            switch (event.getName()) {
+                case "sendwelcometest":
+                    WelcomeHandler welcomeHandler = new WelcomeHandler();
+                    welcomeHandler.sendWelcomeTest(event);
+            }
+        }
     }
 }
 

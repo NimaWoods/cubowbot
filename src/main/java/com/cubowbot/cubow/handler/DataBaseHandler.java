@@ -27,21 +27,21 @@ public class DataBaseHandler {
                     .build();
             logger.info("Connected to Database");
             mongoClient = MongoClients.create(settings);
+
+            MongoDatabase mongoDatabase = mongoClient.getDatabase("cubowbot");
+
+            MongoCollection<Document> collection = mongoDatabase.getCollection("data");
+            logger.info("Connected to Collection");
+
+            logger.info("Creating Documents with Basedata...");
+            Document document = new Document("userID", "303571400164245504");
+            document.append("joinedAt", LocalDateTime.now());
+
+            collection.insertOne(document);
+
+            mongoClient.close();
         } catch (Exception e) {
             logger.error(e.toString());
         }
-
-        MongoDatabase mongoDatabase = mongoClient.getDatabase("cubowbot");
-
-        MongoCollection<Document> collection = mongoDatabase.getCollection("data");
-        logger.info("Connected to Collection");
-
-        logger.info("Creating Documents with Basedata...");
-        Document document = new Document("userID", "303571400164245504");
-        document.append("joinedAt", LocalDateTime.now());
-
-        collection.insertOne(document);
-
-        mongoClient.close();
     }
 }
