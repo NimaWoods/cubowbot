@@ -1,0 +1,90 @@
+{
+  "server_configs": {
+    "1052647405616644216": {
+      "name": "Craftex",
+
+      "ticket_channel": "1052663044053934101",
+      "ticket_category": "1052662732505223188",
+      "Transcript_Channel": "",
+      "Ticket_Title": "Craftex Support Ticket",
+      "Ticket_Description": "Willkommen im Craftex Support!\n Ein Moderator wird sich schnellstmöglich um dein Problem kümmern.\n",
+      "Ticket_Name": "",
+      "Ticket Q&A" : "",
+
+      "ticket_view_role_permission": "1052661922350248048, 1079231987090469016",
+      "ticket_send_role_permission": "1052661922350248048, 1079231987090469016",
+      "ticket_mention_role": "1052661922350248048, 1079231987090469016",
+
+      "Moderation_Notification_Channel": "",
+      "Report_Notification_Channel": "",
+      "Event_Notification_Channel":  "",
+
+      "Welcome_Channel": "",
+      "Welcome_Message": "",
+
+      "Goodbye_Channel": "",
+      "Goodbye_Message": "",
+
+      "Website": "",
+      "Discord": "",
+      "Twitter": "",
+      "Instagram": "",
+      "Facebook": "",
+      "YouTube": "",
+      "Twitch": "",
+
+      "Mute_Role": "",
+      "Join_Autorole": "",
+      "Moderation_Roles": "1052661922350248048L, 1079231987090469016L",
+
+      "paid": "false",
+      "CHATGPT_Permissions": "ALL",
+      "ChatGPT_API_Token": "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",
+
+      "Q&A" : "0"
+    },
+    "1217994812108832880": {
+      "name": "Cubow Bot Support",
+
+      "ticket_channel": "1219794977136050186",
+      "ticket_category": "1219809170186961007",
+      "Transcript_Channel": "",
+      "Ticket_Title": "Cubow Support Ticket",
+      "Ticket_Description": "Willkommen im Cubow Support!\n Ein Moderator wird sich schnellstmöglich um dein Problem kümmern.\n",
+      "Ticket_Name": "",
+      "Ticket Q&A" : "",
+
+      "ticket_view_role_permission": "1218018045210005685",
+      "ticket_send_role_permission": "1218018045210005685",
+      "ticket_mention_role": "1218018045210005685",
+
+      "Moderation_Notification_Channel": "",
+      "Report_Notification_Channel": "",
+      "Event_Notification_Channel":  "",
+
+      "Welcome_Channel": "1220056183700983942",
+      "Welcome_Message": "Willkommen",
+
+      "Goodbye_Channel": "",
+      "Goodbye_Message": "",
+
+      "Website": "",
+      "Discord": "",
+      "Twitter": "",
+      "Instagram": "",
+      "Facebook": "",
+      "YouTube": "",
+      "Twitch": "",
+
+      "Mute_Role": "",
+      "Join_Autorole": "",
+      "Moderation_Roles": "1218018045210005685L",
+
+      "paid": "false",
+      "CHATGPT_Permissions": "ALL",
+      "ChatGPT_API_Token": "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",
+
+      "Q&A" : "0"
+    }
+  }
+}
