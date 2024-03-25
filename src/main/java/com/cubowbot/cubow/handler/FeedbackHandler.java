@@ -91,7 +91,7 @@ public class FeedbackHandler {
                 event.getOption("title").getAsString() +
                 "\\n\\nBug Beschreibung: " + event.getOption("description").getAsString() +
                 "\\n\\nTestLink: " + link +
-                "\\n\\nTicket by: " + event.getMember().getNickname() +
+                "\\n\\nTicket by: " + event.getMember().getEffectiveName() +
                 "\\n\\nFrom Server: " + event.getGuild().getName() + " with ID " + event.getGuild().getId() +
                 "\", \"severity\": \"high\"}";
 

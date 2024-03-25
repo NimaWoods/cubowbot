@@ -1,10 +1,6 @@
 package com.cubowbot.cubow.handler;
 
-import com.cubowbot.cubow.CubowApplication;
-import com.cubowbot.cubow.listener.ContextMenuListener;
-import com.cubowbot.cubow.listener.EventListener;
-import com.cubowbot.cubow.listener.ModalListener;
-import com.cubowbot.cubow.listener.SlashCommandListener;
+import com.cubowbot.cubow.listener.*;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -43,7 +39,7 @@ public class BotHandler extends Thread {
 
         // Load Handler
         EventListener eventListener = new EventListener();
-        ButtonHandler buttonHandler = new ButtonHandler();
+        ButtonListener buttonListener = new ButtonListener();
         SlashCommandListener slashCommandListener = new SlashCommandListener();
         AutoCompleteHandler autoCompleteHandler = new AutoCompleteHandler();
         ModalListener modalListener = new ModalListener();
@@ -58,7 +54,7 @@ public class BotHandler extends Thread {
         builder.addEventListeners(eventListener);
         logger.info("eventListener");
 
-        builder.addEventListeners(buttonHandler);
+        builder.addEventListeners(buttonListener);
         logger.info("buttonHandler");
 
         builder.addEventListeners(autoCompleteHandler);

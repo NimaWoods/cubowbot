@@ -1,4 +1,4 @@
-package com.cubowbot.cubow.handler;
+package com.cubowbot.cubow.listener;
 
 import java.awt.Color;
 import java.io.FileWriter;
@@ -10,11 +10,10 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import com.cubowbot.cubow.CubowApplication;
-import com.mongodb.client.MongoCollection;
+import com.cubowbot.cubow.handler.BetaHandler;
+import com.cubowbot.cubow.handler.ModalsHandler;
+import com.cubowbot.cubow.handler.TicketHandler;
 import net.dv8tion.jda.api.entities.*;
-import net.dv8tion.jda.api.entities.channel.Channel;
-import org.bson.Document;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -28,8 +27,8 @@ import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ButtonHandler extends ListenerAdapter{
-    private static final Logger logger = LoggerFactory.getLogger(ButtonHandler.class);
+public class ButtonListener extends ListenerAdapter{
+    private static final Logger logger = LoggerFactory.getLogger(ButtonListener.class);
     
     @Override
     public void onButtonInteraction(ButtonInteractionEvent event) {
@@ -42,11 +41,24 @@ public class ButtonHandler extends ListenerAdapter{
             modals.generateTicket(event, null);
 
         } else if (event.getComponentId().equals("closeTicket")) {
-            String member = event.getMember().getAsMention();
-            event.reply("Ticket wird von " + member + " geschlossen").queue();
+            EmbedBuilder embedBuilder = new EmbedBuilder();
+            embedBuilder.setTitle("Ticket schließen");
+            embedBuilder.setDescription("Bist du sicher, dass du dieses Ticket schließen möchtest?");
+            embedBuilder.setColor(Color.MAGENTA);
 
-            Channel channel = event.getChannel();
-            channel.delete().queueAfter(10, TimeUnit.SECONDS);
+            event.replyEmbeds(embedBuilder.build())
+                    .setActionRow(Button.success("closeConfirmButtonYes", "✓"), Button.danger("closeConfirmButtonNo", "X"))
+                    .queue();
+        }
+
+        else if (event.getComponentId().equals("closeConfirmButtonYes")) {
+            TicketHandler ticketHandler = new TicketHandler();
+            ticketHandler.closeConfirmButtonYes(event);
+        }
+
+        else if (event.getComponentId().equals("closeConfirmButtonNo")) {
+            TicketHandler ticketHandler = new TicketHandler();
+            ticketHandler.closeConfirmButtonNo(event);
         }
 
         else if (event.getComponentId().equals("closerequestyes")) {

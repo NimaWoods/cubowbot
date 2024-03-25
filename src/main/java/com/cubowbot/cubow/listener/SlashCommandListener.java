@@ -101,7 +101,7 @@ public class SlashCommandListener extends ListenerAdapter {
                 modals.generateTicket(null, event);
                 break;
             case "close":
-                ticketHandler.close();
+                ticketHandler.closeConfirm(event);
                 break;
             case "claim":
                 ticketHandler.claim();

@@ -68,9 +68,18 @@ public class BetaHandler {
     }
 
     public void memberJoinedBeta(ButtonInteractionEvent event ) {
-        LocalDateTime localDateTime = LocalDateTime.now(); // Aktuelles Datum und Uhrzeit abrufen
+        DataBaseHandler dataBaseHandler = new DataBaseHandler();
+        dataBaseHandler.saveBetaMember(event.getMember().getId());
 
-        event.reply("Successfully registered " + event.getMember().getAsMention() + " for Beta.").setEphemeral(true).queue();
+        EmbedBuilder eb = new EmbedBuilder();
+        eb.setTitle("Joined Beta");
+        eb.setDescription("Du wurdest ins Beta Programm aufgenommen und kannst Cubow jetzt einladen!");
+        eb.setColor(Color.MAGENTA);
+
+        event.replyEmbeds(eb.build())
+                .setEphemeral(true)
+                .setActionRow(Button.link("cubow.nimawoods.de", "Cubow einladen"))
+                .queue();
     }
 
 }

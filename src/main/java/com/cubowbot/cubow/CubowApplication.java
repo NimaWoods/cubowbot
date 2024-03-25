@@ -26,11 +26,9 @@ public class CubowApplication {
 		SpringApplication.run(CubowApplication.class, args);
 		logger.info("\nServer started\n");
 
-		if (false) {
-			logger.info("Connecting to MongoDB Database...");
-			DataBaseHandler dataBaseHandler = new DataBaseHandler();
-			dataBaseHandler.connect();
-		}
+		DataBaseHandler dataBaseHandler = new DataBaseHandler();
+		dataBaseHandler.testConnection();
+
 		// Connecting Discord Bot
 		logger.info("Connecting Bot JDA...");
 

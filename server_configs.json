@@ -18,6 +18,7 @@
       "Moderation_Notification_Channel": "",
       "Report_Notification_Channel": "",
       "Event_Notification_Channel":  "",
+      "Rules" : "",
 
       "Welcome_Channel": "",
       "Welcome_Message": "",
@@ -61,6 +62,7 @@
       "Moderation_Notification_Channel": "",
       "Report_Notification_Channel": "",
       "Event_Notification_Channel":  "",
+      "Rules" : "- Swiper nicht klauen",
 
       "Welcome_Channel": "1220056183700983942",
       "Welcome_Message": "Willkommen",
