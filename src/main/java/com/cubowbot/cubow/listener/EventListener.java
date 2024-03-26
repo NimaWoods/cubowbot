@@ -1,6 +1,7 @@
 package com.cubowbot.cubow.listener;
 
 import com.cubowbot.cubow.CubowApplication;
+import com.cubowbot.cubow.handler.AutoModHandler;
 import com.cubowbot.cubow.handler.ConfigHandler;
 import com.cubowbot.cubow.handler.WelcomeHandler;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -10,6 +11,7 @@ import net.dv8tion.jda.api.events.channel.ChannelDeleteEvent;
 import net.dv8tion.jda.api.events.guild.GuildBanEvent;
 import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,5 +65,11 @@ public class EventListener extends ListenerAdapter {
     @Override
     public void onGuildJoin(GuildJoinEvent event) {
         event.getGuild().leave();
+    }
+
+    @Override
+    public void onMessageReceived(MessageReceivedEvent event) {
+        AutoModHandler autoModHandler = new AutoModHandler();
+        autoModHandler.checkForBadWord(event);
     }
 }
