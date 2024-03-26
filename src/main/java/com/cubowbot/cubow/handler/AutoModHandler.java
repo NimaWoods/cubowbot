@@ -20,6 +20,8 @@ public class AutoModHandler {
 
     MessageReceivedEvent event = this.event;
 
+
+    // TODO Autmod soll für jeden Server ausgeschaltet werden können
     public void checkForBadWord() {
 
         List<String> badWordsList = new ArrayList<String>();
