@@ -1,6 +1,7 @@
 package com.cubowbot.cubow.listener;
 
 import com.cubowbot.cubow.CubowApplication;
+import com.cubowbot.cubow.handler.AutoModHandler;
 import com.cubowbot.cubow.handler.ConfigHandler;
 import com.cubowbot.cubow.handler.DataBaseHandler;
 import com.cubowbot.cubow.handler.WelcomeHandler;
@@ -13,6 +14,7 @@ import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.events.user.UserActivityEndEvent;
 import net.dv8tion.jda.api.events.user.UserActivityStartEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import org.bson.Document;
@@ -128,4 +130,11 @@ public class EventListener extends ListenerAdapter {
             channel.sendMessage(streamerName + " has ended the stream.").queue();
         }
     }*/
+
+    @Override
+    public void onMessageReceived(MessageReceivedEvent event) {
+        AutoModHandler autoModHandler = new AutoModHandler(event);
+        autoModHandler.checkForBadWord();
+        autoModHandler.checkForLink();
+    }
 }
