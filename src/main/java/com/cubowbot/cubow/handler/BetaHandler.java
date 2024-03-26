@@ -71,6 +71,7 @@ public class BetaHandler {
     }
 
     public void memberJoinedBeta(ButtonInteractionEvent event ) {
+        event.deferReply().setEphemeral(true).queue();
         DataBaseHandler dataBaseHandler = new DataBaseHandler();
         EmbedBuilder eb = new EmbedBuilder();
 
@@ -86,8 +87,7 @@ public class BetaHandler {
                 eb.setDescription("Du wurdest ins Beta Programm aufgenommen und kannst Cubow jetzt einladen!");
                 eb.setColor(Color.MAGENTA);
 
-                event.replyEmbeds(eb.build())
-                        .setEphemeral(true)
+                event.getHook().editOriginalEmbeds(eb.build())
                         .setActionRow(Button.link("https://cubow.nimawoods.de/invite", "Cubow einladen"))
                         .queue();
             } else {
@@ -97,16 +97,15 @@ public class BetaHandler {
                 eb.setImage("https://i.imgur.com/9jD9bSF.jpg");
                 eb.setColor(Color.MAGENTA);
 
-                event.replyEmbeds(eb.build())
-                        .setEphemeral(true)
+                event.getHook().editOriginalEmbeds(eb.build())
                         .queue();
             }
+        } else {
             eb.setTitle("Bereits registriert");
             eb.setDescription("Du bist bereits registriert");
             eb.setColor(Color.RED);
 
-            event.replyEmbeds(eb.build())
-                    .setEphemeral(true)
+            event.getHook().editOriginalEmbeds(eb.build())
                     .setActionRow(Button.link("https://cubow.nimawoods.de/invite", "Cubow einladen"))
                     .queue();
         }
