@@ -14,7 +14,13 @@ import java.util.List;
 
 public class AutoModHandler {
 
-    public void checkForBadWord(MessageReceivedEvent event) {
+    public AutoModHandler(MessageReceivedEvent event) {
+        this.event = event;
+    }
+
+    MessageReceivedEvent event = this.event;
+
+    public void checkForBadWord() {
 
         List<String> badWordsList = new ArrayList<String>();
         String urlEN = "https://raw.githubusercontent.com/LDNOOBW/List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words/master/en";
@@ -67,5 +73,19 @@ public class AutoModHandler {
                 return;
             }
         }
+    } public void checkForLink() {
+        String message = event.getMessage().getContentRaw();
+
+        if (message.contains("\\(?\\bhttp://[-A-Za-z0-9+&@#/%?=~_()|!:,.;]*[-A-Za-z0-9+&@#/%=~_()|]")) {
+            EmbedBuilder embedBuilder = new EmbedBuilder();
+            embedBuilder.setTitle("Bad Word");
+            embedBuilder.setDescription("Your message contains a Link that is not allowed on this server");
+            embedBuilder.addField("User", event.getMember().getAsMention(), true);
+            embedBuilder.setColor(Color.MAGENTA);
+
+            event.getMessage().replyEmbeds(embedBuilder.build()).queue();
+            event.getMessage().delete().queue();
+            return;
+        };
     }
 }
