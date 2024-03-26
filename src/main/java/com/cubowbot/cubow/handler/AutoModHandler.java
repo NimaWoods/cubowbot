@@ -76,7 +76,7 @@ public class AutoModHandler {
     } public void checkForLink() {
         String message = event.getMessage().getContentRaw();
 
-        if (message.contains("\\(?\\bhttp://[-A-Za-z0-9+&@#/%?=~_()|!:,.;]*[-A-Za-z0-9+&@#/%=~_()|]")) {
+        if (message.contains("\\(?\\bhttp://[-A-Za-z0-9+&@#/%?=~_()|!:,.;]*[-A-Za-z0-9+&@#/%=~_()|]") && false) {
             EmbedBuilder embedBuilder = new EmbedBuilder();
             embedBuilder.setTitle("Bad Word");
             embedBuilder.setDescription("Your message contains a Link that is not allowed on this server");
