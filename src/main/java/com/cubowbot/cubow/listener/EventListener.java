@@ -70,7 +70,7 @@ public class EventListener extends ListenerAdapter {
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
         AutoModHandler autoModHandler = new AutoModHandler(event);
-        autoModHandler.checkForBadWord();
+        /*autoModHandler.checkForBadWord();*/
         autoModHandler.checkForLink();
     }
 }

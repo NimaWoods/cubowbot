@@ -25,15 +25,15 @@ public class AutoModHandler {
     public void checkForBadWord() {
 
         List<String> badWordsList = new ArrayList<String>();
-        String urlEN = "https://raw.githubusercontent.com/LDNOOBW/List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words/master/en";
-        String urlDE = "https://raw.githubusercontent.com/LDNOOBW/List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words/master/de";
+        // String urlEN = "https://raw.githubusercontent.com/LDNOOBW/List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words/master/en";
+        // String urlDE = "https://raw.githubusercontent.com/LDNOOBW/List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words/master/de";
 
         badWordsList.add("卐");
         badWordsList.add("卍");
 
 
         // Loading BadWords list
-        try {
+        /*try {
             // English
             URL fileUrlEN = new URL(urlEN);
             BufferedReader readerEN = new BufferedReader(new InputStreamReader(fileUrlEN.openStream()));
@@ -73,9 +73,9 @@ public class AutoModHandler {
                         .queue();
                 event.getMessage().delete().queue();
                 return;
-            }
+            } */
         }
-    } public void checkForLink() {
+    public void checkForLink() {
         String message = event.getMessage().getContentRaw();
 
         if (message.contains("\\(?\\bhttp://[-A-Za-z0-9+&@#/%?=~_()|!:,.;]*[-A-Za-z0-9+&@#/%=~_()|]") && false) {
