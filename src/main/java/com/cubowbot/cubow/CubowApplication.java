@@ -26,8 +26,7 @@ public class CubowApplication {
 		SpringApplication.run(CubowApplication.class, args);
 		logger.info("\nServer started\n");
 
-		DataBaseHandler dataBaseHandler = new DataBaseHandler();
-		dataBaseHandler.testConnection();
+		new DataBaseHandler();
 
 		// Connecting Discord Bot
 		logger.info("Connecting Bot JDA...");

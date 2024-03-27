@@ -1,4 +1,4 @@
 package com.cubowbot.cubow.handler;
 
-public class NotifycationHandler {
+public class TwitchHandler {
 }

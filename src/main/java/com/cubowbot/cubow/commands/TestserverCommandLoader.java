@@ -3,7 +3,9 @@ package com.cubowbot.cubow.commands;
 import com.cubowbot.cubow.CubowApplication;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
+import net.dv8tion.jda.api.interactions.commands.build.SubcommandData;
 import net.dv8tion.jda.internal.interactions.CommandDataImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,8 +24,7 @@ public class TestserverCommandLoader {
 
         List<CommandData> commandList = List.of(
 
-                new CommandDataImpl("sendwelcometest", "Test")
-
+            //new CommandDataImpl("sendwelcometest", "Test");
         );
 
         // Testserver

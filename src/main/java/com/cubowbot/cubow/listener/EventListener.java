@@ -1,10 +1,7 @@
 package com.cubowbot.cubow.listener;
 
 import com.cubowbot.cubow.CubowApplication;
-import com.cubowbot.cubow.handler.AutoModHandler;
-import com.cubowbot.cubow.handler.ConfigHandler;
-import com.cubowbot.cubow.handler.DataBaseHandler;
-import com.cubowbot.cubow.handler.WelcomeHandler;
+import com.cubowbot.cubow.handler.*;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
@@ -32,7 +29,7 @@ public class EventListener extends ListenerAdapter {
     @Override
     public void onGuildMemberJoin(GuildMemberJoinEvent event) {
         Guild guild = event.getGuild();
-        Role role = guild.getRoleById("1052663439044120686");
+        Role role = guild.getRoleById(ConfigHandler.getServerConfig(event.getGuild().getId(),"Join_Autorole"));
 
         if (role != null) {
             guild.addRoleToMember(event.getMember(), role).queue();
@@ -72,64 +69,33 @@ public class EventListener extends ListenerAdapter {
 
     @Override
     public void onGuildJoin(GuildJoinEvent event) {
-        DataBaseHandler dataBaseHandler = new DataBaseHandler();
-        EmbedBuilder eb = new EmbedBuilder();
-
-        Guild guild = event.getGuild();
-
-        List<Document> betaMembers = dataBaseHandler.getAllBetaMembers();
-        List<String> betaMemberIds = betaMembers.stream()
-                .map(doc -> doc.getString("userID"))
-                .collect(Collectors.toList());
-
-        List<Member> adminMembers = guild.getMembers().stream()
-                .filter(member -> member.getRoles().stream()
-                        .anyMatch(role -> role.getName().equalsIgnoreCase("admin")))
-                .collect(Collectors.toList());
-
-        boolean isAdminBetaMember = adminMembers.stream()
-                .anyMatch(member -> betaMemberIds.contains(member.getId()));
-
-        if (isAdminBetaMember) {
-            logger.info("Cubow joined server " + event.getGuild().getName());
-        } else {
-            TextChannel textChannel = (TextChannel) guild.getDefaultChannel();
-
-            eb.setTitle("Cubow Bot");
-            eb.setDescription("Jemand hat gerade versucht, Cubow einzuladen, obwohl keiner der Administratoren dieses Servers am Cubow-Betaprogramm teilnimmt." +
-                    "Derzeit verfügen wir über eine begrenzte Bandbreite und müssen das Interesse an Cubow abschätzen. Daher gewähren wir derzeit nur Zugang zur Beta." +
-                    "\n\n" +
-                    "Wenn du Interesse an Betaplätzen oder allgemeinen Updates zu Cubow hast, kannst du unserem offiziellen Discord-Server beitreten. " +
-                    "Dort kannst du Cubow ausprobieren oder der Beta beitreten.");
-            eb.setColor(Color.MAGENTA);
-
-            textChannel.sendMessageEmbeds(eb.build())
-                    .setActionRow(Button.link("https://discord.gg/xHYD4Bm5x6", "Cubow Discord"))
-                    .queue();
-
-            guild.leave().queue();
-        }
+        BetaHandler betaHandler = new BetaHandler();
+        betaHandler.joinedServer(event);
 
     }
 
     @Override
     public void onUserActivityStart(UserActivityStartEvent event) {
-        if (event.getNewActivity().getType() == Activity.ActivityType.STREAMING) {
-            TextChannel channel = event.getJDA().getTextChannelById(ConfigHandler.getServerConfig(event.getGuild().getId(), "Live_Notification_Channel"));
-            String streamerName = event.getUser().getName();
-            String streamUrl = event.getNewActivity().getUrl();
-            channel.sendMessage(streamerName + " ist Live auf " + streamUrl).queue();
+        if (ConfigHandler.getServerConfig(event.getGuild().getId(), "Live_Notification_Channel") != null) {
+            if (event.getNewActivity().getType() == Activity.ActivityType.STREAMING) {
+                TextChannel channel = event.getJDA().getTextChannelById(ConfigHandler.getServerConfig(event.getGuild().getId(), "Live_Notification_Channel"));
+                String streamerName = event.getUser().getName();
+                String streamUrl = event.getNewActivity().getUrl();
+                channel.sendMessage(streamerName + " ist Live auf " + streamUrl).queue();
+            }
         }
     }
 
-    /*@Override
+    @Override
     public void onUserActivityEnd(UserActivityEndEvent event) {
-        if (event.getOldActivity().getType() == Activity.ActivityType.STREAMING) {
-            TextChannel channel = event.getJDA().getTextChannelById(ConfigHandler.getServerConfig(event.getGuild().getId(), "Live_Notification_Channel"));
-            String streamerName = event.getUser().getName();
-            channel.sendMessage(streamerName + " has ended the stream.").queue();
+        if (ConfigHandler.getServerConfig(event.getGuild().getId(), "Offline_Notification_Channel") != null) {
+            if (event.getOldActivity().getType() == Activity.ActivityType.STREAMING) {
+                TextChannel channel = event.getJDA().getTextChannelById(ConfigHandler.getServerConfig(event.getGuild().getId(), "Live_Notification_Channel"));
+                String streamerName = event.getUser().getName();
+                channel.sendMessage(streamerName + " has ended the stream.").queue();
+            }
         }
-    }*/
+    }
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
