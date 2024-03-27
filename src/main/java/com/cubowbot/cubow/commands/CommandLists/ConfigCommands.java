@@ -18,7 +18,7 @@ public class ConfigCommands {
                                 new SubcommandData("rules", "Rules Embed to send in the rule channel")
                                         .addOption(OptionType.STRING, "rules", "\\n for new line"),
                                 new SubcommandData("rule_channel", "Rules Embed to send in the rule channel")
-                                        .addOption(OptionType.CHANNEL, "rulechannel", "\\n for new line"),
+                                        .addOption(OptionType.CHANNEL, "rule_channel", "\\n for new line"),
 
                                 new SubcommandData("welcome_channel", "Welcome Channel")
                                         .addOption(OptionType.CHANNEL, "welcomechannel", "test"),

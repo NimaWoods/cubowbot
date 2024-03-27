@@ -1,14 +1,17 @@
 package com.cubowbot.cubow.listener;
 
-import com.cubowbot.cubow.handler.DataBaseHandler;
+import com.cubowbot.cubow.handler.ConfigHandler;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 
 public class SubcommandListener {
-    DataBaseHandler dataBaseHandler = new DataBaseHandler();
     public void options(SlashCommandInteractionEvent event) {
-        switch (event.getSubcommandName()) {
+
+        String subCommandName = event.getSubcommandName();
+
+        switch (subCommandName) {
             case "rules":
-                dataBaseHandler.updateDocument("serverconfigurations", "", "", "");
+                ConfigHandler configHandler = new ConfigHandler();
+                configHandler.saveOption(event);
             case "rule_channel":
                 System.out.println("TESSSSSSSSSST");
             case "welcome_channel":

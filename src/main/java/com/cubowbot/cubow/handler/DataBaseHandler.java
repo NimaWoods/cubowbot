@@ -7,6 +7,7 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
 import net.dv8tion.jda.api.entities.Member;
 import org.bson.Document;
 import org.slf4j.Logger;
@@ -18,7 +19,7 @@ import java.util.List;
 
 public class DataBaseHandler {
     private static final Logger logger = LoggerFactory.getLogger(DataBaseHandler.class);
-    private MongoDatabase mongoDatabase;
+    private final MongoDatabase mongoDatabase;
 
     public DataBaseHandler(MongoDatabase mongoDatabase) {
         this.mongoDatabase = mongoDatabase;
@@ -56,10 +57,20 @@ public class DataBaseHandler {
         return documents;
     }
 
+    public Document getDocument(String collectionName, String documentID) {
+        try {
+            MongoCollection<Document> collection = mongoDatabase.getCollection(collectionName);
+            return collection.find(Filters.eq("serverid", documentID)).first();
+        } catch (Exception e) {
+            logger.error("Error while retrieving document {} from collection {}: {}", documentID, collectionName, e.getMessage());
+            return null;
+        }
+    }
+
     public void updateDocument(String collectionName, String documentID, String fieldName, String fieldValue) {
         try {
             MongoCollection<Document> collection = mongoDatabase.getCollection(collectionName);
-            Document query = new Document("_id", documentID);
+            Document query = new Document("serverid", documentID);
             Document update = new Document("$set", new Document(fieldName, fieldValue));
             collection.updateOne(query, update);
             logger.info("Document updated successfully in collection: {}", collectionName);
@@ -88,7 +99,7 @@ public class DataBaseHandler {
             logger.info("Connected to Collection");
 
             Document document = new Document("userID", member.getId())
-                    .append("username", member.getNickname())
+                    .append("username", member.getEffectiveName())
                     .append("joinedAt", LocalDateTime.now());
 
             collection.insertOne(document);
