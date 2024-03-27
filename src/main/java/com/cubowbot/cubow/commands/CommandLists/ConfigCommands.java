@@ -55,6 +55,7 @@ public class ConfigCommands {
                                 new SubcommandData("chatgpt_permissions", "ALL/ADMIN/OWNER")
                                     .addOption(OptionType.STRING, "chatgpt_permissions", "ALL/ADMIN/OWNER"),
                                 new SubcommandData("chatgpt_api_token", "ChatGPT API Token")
+                                        .addOption(OptionType.STRING, "chatgpt_api_token", "ALL/ADMIN/OWNER")
                         )),
 
                 new CommandDataImpl("ticketoptions", "Set every ticket Option for your server")

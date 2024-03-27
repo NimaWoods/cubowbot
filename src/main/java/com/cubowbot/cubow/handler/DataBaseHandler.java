@@ -25,12 +25,11 @@ public class DataBaseHandler {
     }
 
     public DataBaseHandler() {
-        String uri = "mongodb://5.45.109.197:27017/cubowbot";
+        String uri = "mongodb://admin:N1ma15tT01122!@5.45.109.197:27017/admin";
         MongoClientSettings settings = MongoClientSettings.builder()
                 .applyConnectionString(new ConnectionString(uri))
                 .build();
         logger.info("Connecting to Database");
-        logger.info("Testing connection...");
         MongoClient mongoClient = MongoClients.create(settings);
         this.mongoDatabase = mongoClient.getDatabase("cubowbot");
     }

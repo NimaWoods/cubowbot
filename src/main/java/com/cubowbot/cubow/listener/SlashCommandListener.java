@@ -66,6 +66,15 @@ public class SlashCommandListener extends ListenerAdapter {
         }
 
         // setting
+        switch (event.getName()) {
+            case "options":
+                subcommandListener.options(event);
+            case "ticketoptions":
+                subcommandListener.ticketoptions(event);
+            case "notificationoptions":
+                subcommandListener.notificationoptions(event);
+        }
+
         if (event.getName().equals("option")) {
             subcommandListener.options(event);
         }
