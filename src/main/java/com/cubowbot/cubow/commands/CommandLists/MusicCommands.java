@@ -13,7 +13,7 @@ public class MusicCommands {
         List<CommandData> commandList = List.of(
 
                 new CommandDataImpl("play", "Play a Song")
-                        .addOption(OptionType.STRING, "link", "The song to play (youtube link/name)", true)
+                        .addOption(OptionType.STRING, "link", "The song to play (youtube link/song name)", true)
 
         );
 

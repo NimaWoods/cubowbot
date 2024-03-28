@@ -113,4 +113,15 @@ public class MiscHandler {
         event.replyEmbeds(eb.build()).queue();
     }
 
+    public void coinflip() {
+        RandomizerHandler randomizerHandler = new RandomizerHandler();
+        boolean random = randomizerHandler.randomBoolean();
+
+        if(random) {
+            event.reply("Kopf").queue();
+        } else {
+            event.reply("Zahl").queue();
+        }
+    }
+
 }

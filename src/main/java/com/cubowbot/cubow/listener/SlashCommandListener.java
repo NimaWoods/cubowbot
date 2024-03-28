@@ -93,6 +93,8 @@ public class SlashCommandListener extends ListenerAdapter {
             case "serverstats":
                 miscHandler.serverstats();
                 break;
+            case "coinflip":
+                miscHandler.coinflip();
         }
 
         // Help Commands Handler

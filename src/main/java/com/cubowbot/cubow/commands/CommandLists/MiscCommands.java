@@ -20,7 +20,9 @@ public class MiscCommands {
                         .addOption(OptionType.ATTACHMENT, "image", "Emoji", true),
 
                 new CommandDataImpl("removeemoji", "Remove an Emoji from the Server")
-                        .addOption(OptionType.STRING, "emoji", "Please provide the Emoji")
+                        .addOption(OptionType.STRING, "emoji", "Please provide the Emoji"),
+
+                new CommandDataImpl("coinflip", "Flip a Coin")
 
         );
 
