@@ -1,11 +1,14 @@
 package com.cubowbot.cubow.handler;
 
+import com.cubowbot.cubow.CubowApplication;
 import com.cubowbot.cubow.generator.EmbedGenerator;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Icon;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.channel.Channel;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
@@ -13,6 +16,7 @@ import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import java.awt.Color;
 import java.io.IOException;
 import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.Objects;
 
 public class MiscHandler {
@@ -117,11 +121,32 @@ public class MiscHandler {
         RandomizerHandler randomizerHandler = new RandomizerHandler();
         boolean random = randomizerHandler.randomBoolean();
 
-        if(random) {
-            event.reply("Kopf").queue();
+        CubowApplication cubowApplication = new CubowApplication();
+        JDA bot = cubowApplication.getJDA();
+
+        EmbedBuilder embedBuilder = new EmbedBuilder();
+        embedBuilder.setColor(Color.MAGENTA);
+
+        TextChannel channel = bot.getGuildById("1217994812108832880").getTextChannelById("1222977221090611323");
+
+        if (random) {
+            channel.retrieveMessageById("1222977273913933894").queue(message -> {
+                List<Message.Attachment> attachments = message.getAttachments();
+                    Message.Attachment attachment = attachments.get(0);
+                    embedBuilder.setTitle("Kopf");
+                    embedBuilder.setImage(attachment.getUrl());
+                    event.replyEmbeds(embedBuilder.build()).queue();
+            });
         } else {
-            event.reply("Zahl").queue();
+            channel.retrieveMessageById("1222981783310700644").queue(message -> {
+                List<Message.Attachment> attachments = message.getAttachments();
+                    Message.Attachment attachment = attachments.get(0);
+                    embedBuilder.setTitle("Zahl");
+                    embedBuilder.setImage(attachment.getUrl());
+                    event.replyEmbeds(embedBuilder.build()).queue();
+            });
         }
     }
+
 
 }
