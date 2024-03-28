@@ -24,7 +24,6 @@ public class SlashCommandListener extends ListenerAdapter {
         ModerationHandler moderationHandler = new ModerationHandler(event);
         MiscHandler miscHandler = new MiscHandler(event);
         CommandHandler commandHandler = new CommandHandler(event);
-        TicketHandler ticketHandler = new TicketHandler(event);
         GiveawayHandler giveawayHandler = new GiveawayHandler(event);
         EmbedHandler embedHandler = new EmbedHandler(event);
         AICommandHandler aiCommandHandler = new AICommandHandler(event);
