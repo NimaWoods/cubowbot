@@ -41,10 +41,8 @@ public class SlashCommandListener extends ListenerAdapter {
             case "ping":
                 textResponseHandler.sendPing();
                 break;
-        }
 
-        // Moderation
-        switch (event.getName()) {
+            // Moderation
             case "ban":
                 moderationHandler.ban();
                 break;
@@ -63,24 +61,20 @@ public class SlashCommandListener extends ListenerAdapter {
             case "report":
                 moderationHandler.report();
                 break;
-        }
 
-        // setting
-        switch (event.getName()) {
+            // setting
             case "options":
                 subcommandListener.options(event);
             case "ticketoptions":
                 subcommandListener.ticketoptions(event);
             case "notificationoptions":
                 subcommandListener.notificationoptions(event);
-        }
 
-        if (event.getName().equals("option")) {
-            subcommandListener.options(event);
-        }
+            // options
+            case "option":
+                subcommandListener.options(event);
 
-        //misc
-        switch (event.getName()) {
+            //misc
             case "avatar":
                 miscHandler.avatar();
                 break;
@@ -95,29 +89,23 @@ public class SlashCommandListener extends ListenerAdapter {
                 break;
             case "coinflip":
                 miscHandler.coinflip();
-        }
 
-        // Help Commands Handler
-        switch (event.getName()) {
+            // Help Commands Handler
             case "commands", "help":
                 commandHandler.help();
                 break;
-        }
 
-        // Ticket Commands Handler
-        if(event.getName().equals("ticket")) {
-            subcommandListener.Ticket(event);
-        }
+            // Ticket Commands Handler
+            case "ticket":
+                subcommandListener.Ticket(event);
+                break;
 
-        // giveaway
-        switch(event.getName()) {
+            // giveaway
             case "creategiveaway":
                 giveawayHandler.creategiveaway();
                 break;
-        }
 
-        // embeds,
-        switch(event.getName()) {
+            // embeds
             case "embedcreate":
                 embedHandler.embedcreate();
                 break;
@@ -128,37 +116,21 @@ public class SlashCommandListener extends ListenerAdapter {
                 embedHandler.embedaddfield();
                 break;
 
-        }
-
-        // AI Handler
-        switch (event.getName()) {
+            // AI Handler
             case "chatgpt":
                 aiCommandHandler.chatgpt();
                 break;
             case "dall-e":
                 aiCommandHandler.dalle();
                 break;
-        }
 
-        // Feedback Commands
-        switch (event.getName()) {
+            // Feedback Commands
             case "bug":
                 feedbackHandler.bug();
                 break;
             case "suggest":
                 feedbackHandler.suggest();
                 break;
-
-        }
-
-        // Test Commands
-        // Deactivate if not in use
-        if(true) {
-            switch (event.getName()) {
-                case "sendwelcometest":
-                    WelcomeHandler welcomeHandler = new WelcomeHandler();
-                    welcomeHandler.sendWelcomeTest(event);
-            }
         }
     }
 }
