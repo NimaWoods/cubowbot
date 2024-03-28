@@ -1,17 +1,19 @@
 package com.cubowbot.cubow.listener;
 
 import com.cubowbot.cubow.handler.ConfigHandler;
+import com.cubowbot.cubow.handler.ModalsHandler;
+import com.cubowbot.cubow.handler.TicketHandler;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.interactions.modals.Modal;
 
 public class SubcommandListener {
 
     ConfigHandler configHandler = new ConfigHandler();
 
     public void options(SlashCommandInteractionEvent event) {
+        configHandler.saveOption(event);
 
-        String subCommandName = event.getSubcommandName();
-        
-        switch (subCommandName) {
+        /*switch (event.getSubcommandName()) {
             case "rules":
                 configHandler.saveOption(event);
             case "rule_channel":
@@ -52,7 +54,7 @@ public class SubcommandListener {
                 configHandler.saveOption(event);
             case "chatgpt_api_token":
                 configHandler.saveOption(event);
-        }
+        }*/
     }
 
     public void ticketoptions(SlashCommandInteractionEvent event) {
@@ -91,6 +93,43 @@ public class SubcommandListener {
                 configHandler.saveOption(event);
             case "offline_notification_channel":
                 configHandler.saveOption(event);
+        }
+    }
+
+    public void Ticket(SlashCommandInteractionEvent event) {
+        TicketHandler ticketHandler = new TicketHandler();
+        ModalsHandler modals = new ModalsHandler();
+        switch (event.getName()) {
+            default:
+                modals.generateTicket(null, event);
+                break;
+            case "sendpanel":
+                ticketHandler.sendDashboard(event.getGuild());
+                break;
+            case "add":
+                ticketHandler.add();
+                break;
+            case "remove":
+                ticketHandler.remove();
+                break;
+            case "ticket":
+                modals.generateTicket(null, event);
+                break;
+            case "close":
+                ticketHandler.closeConfirm(event);
+                break;
+            case "claim":
+                ticketHandler.claim();
+                break;
+            case "transfer":
+                ticketHandler.transfer();
+                break;
+            case "unclaim":
+                ticketHandler.unclaim();
+                break;
+            case "closerequest":
+                ticketHandler.closerequest();
+                break;
         }
     }
 }

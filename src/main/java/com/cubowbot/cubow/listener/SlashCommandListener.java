@@ -105,34 +105,8 @@ public class SlashCommandListener extends ListenerAdapter {
         }
 
         // Ticket Commands Handler
-        switch (event.getName()) {
-            case "sendpanel":
-                ticketHandler.sendDashboard(event.getGuild());
-                break;
-            case "add":
-                ticketHandler.add();
-                break;
-            case "remove":
-                ticketHandler.remove();
-                break;
-            case "ticket":
-                modals.generateTicket(null, event);
-                break;
-            case "close":
-                ticketHandler.closeConfirm(event);
-                break;
-            case "claim":
-                ticketHandler.claim();
-                break;
-            case "transfer":
-                ticketHandler.transfer();
-                break;
-            case "unclaim":
-                ticketHandler.unclaim();
-                break;
-            case "closerequest":
-                ticketHandler.closerequest();
-                break;
+        if(event.getName().equals("ticket")) {
+            subcommandListener.Ticket(event);
         }
 
         // giveaway
