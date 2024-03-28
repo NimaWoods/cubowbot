@@ -70,10 +70,14 @@ public class EventListener extends ListenerAdapter {
     @Override
     public void onGuildJoin(GuildJoinEvent event) {
         EmbedBuilder embedBuilder = new EmbedBuilder();
-        embedBuilder.setTitle("Hallo Cubow");
+        embedBuilder.setTitle("Hallo, ich bin Cubow");
         embedBuilder.setDescription("Vielen Dank, dass du Cubow nutzt. Wir sind gerade noch mitten im Aufbau, aber wir freuen uns, dass du dabei bist.");
-        embedBuilder.addField("Website", "cubow.nimawoods.de", true);
-        event.getGuild().getDefaultChannel().asTextChannel().sendMessageEmbeds(embedBuilder.build()).queue();
+        embedBuilder.addField("Cubow einrichten", "/setup", true);
+        embedBuilder.setColor(Color.MAGENTA);
+        event.getGuild().getDefaultChannel().asTextChannel().sendMessageEmbeds(embedBuilder.build())
+                .setActionRow(Button.link("https://discord.com/oauth2/authorize?client_id=1217485873508253839", "Cubow einladen"),
+                        Button.link("https://discord.gg/xHYD4Bm5x6", "Cubow Discord Server"))
+                .queue();
     }
 
     @Override
