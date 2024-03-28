@@ -69,9 +69,11 @@ public class EventListener extends ListenerAdapter {
 
     @Override
     public void onGuildJoin(GuildJoinEvent event) {
-        BetaHandler betaHandler = new BetaHandler();
-        betaHandler.joinedServer(event);
-
+        EmbedBuilder embedBuilder = new EmbedBuilder();
+        embedBuilder.setTitle("Hallo Cubow");
+        embedBuilder.setDescription("Vielen Dank, dass du Cubow nutzt. Wir sind gerade noch mitten im Aufbau, aber wir freuen uns, dass du dabei bist.");
+        embedBuilder.addField("Website", "cubow.nimawoods.de", true);
+        event.getGuild().getDefaultChannel().asTextChannel().sendMessageEmbeds(embedBuilder.build()).queue();
     }
 
     @Override
