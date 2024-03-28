@@ -5,9 +5,11 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
+import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import org.bson.Document;
@@ -39,7 +41,6 @@ public class BetaHandler {
         embedBuilder.setTitle(title);
         embedBuilder.setDescription(description);
         embedBuilder.setColor(Color.MAGENTA);
-        embedBuilder.setFooter("Cubow sammelt keine Daten über dich oder deine Mitglieder!", bot.getSelfUser().getAvatarUrl());
 
         if (channel != null) {
             try {
@@ -71,6 +72,10 @@ public class BetaHandler {
     }
 
     public void memberJoinedBeta(ButtonInteractionEvent event ) {
+        CubowApplication cubowApplication = new CubowApplication();
+        JDA bot = cubowApplication.getJDA();
+
+        event.deferReply().setEphemeral(true).queue();
         DataBaseHandler dataBaseHandler = new DataBaseHandler();
         EmbedBuilder eb = new EmbedBuilder();
 
@@ -81,34 +86,83 @@ public class BetaHandler {
 
         if(!betaMemberIds.contains(event.getMember().getId())) {
             if (betaMembers.stream().count() < 20) {
-                dataBaseHandler.saveBetaMember(event.getMember().getId());
-                eb.setTitle("Joined Beta");
-                eb.setDescription("Du wurdest ins Beta Programm aufgenommen und kannst Cubow jetzt einladen!");
-                eb.setColor(Color.MAGENTA);
+                Boolean sucess = dataBaseHandler.saveBetaMember(event.getMember());
 
-                event.replyEmbeds(eb.build())
-                        .setEphemeral(true)
-                        .setActionRow(Button.link("https://cubow.nimawoods.de/invite", "Cubow einladen"))
-                        .queue();
+                if (sucess) {
+                    eb.setTitle("Joined Beta");
+                    eb.setDescription("Du wurdest ins Beta Programm aufgenommen und kannst Cubow jetzt einladen!");
+                    eb.setColor(Color.GREEN);
+
+                    event.getHook().editOriginalEmbeds(eb.build())
+                            .setActionRow(Button.link(bot.getInviteUrl(Permission.ADMINISTRATOR), "Invite"))
+                            .queue();
+                } else {
+                    eb.setTitle("Fehler");
+                    eb.setDescription("Etwas ist schief gelaufen");
+                    eb.setColor(Color.RED);
+
+                    event.getHook().editOriginalEmbeds(eb.build())
+                            .setActionRow(Button.primary("ticket", "Ticket erstellen"))
+                            .queue();
+                }
             } else {
                 eb.setTitle("Alle Plätze sind belegt");
                 eb.setDescription("Leider schaffen unsere Server diesen Ansturm nicht und wir müssen upgraden. Wir benachrichtigen dich aber sobald wieder" +
                         "neue Plätze da sind");
                 eb.setImage("https://i.imgur.com/9jD9bSF.jpg");
-                eb.setColor(Color.MAGENTA);
+                eb.setColor(Color.RED);
 
-                event.replyEmbeds(eb.build())
-                        .setEphemeral(true)
+                event.getHook().editOriginalEmbeds(eb.build())
                         .queue();
             }
+        } else {
             eb.setTitle("Bereits registriert");
             eb.setDescription("Du bist bereits registriert");
             eb.setColor(Color.RED);
 
-            event.replyEmbeds(eb.build())
-                    .setEphemeral(true)
+            event.getHook().editOriginalEmbeds(eb.build())
                     .setActionRow(Button.link("https://cubow.nimawoods.de/invite", "Cubow einladen"))
                     .queue();
+        }
+    }
+
+    public void joinedServer(GuildJoinEvent event) {
+        DataBaseHandler dataBaseHandler = new DataBaseHandler();
+        EmbedBuilder eb = new EmbedBuilder();
+
+        Guild guild = event.getGuild();
+
+        List<Document> betaMembers = dataBaseHandler.getAllBetaMembers();
+        List<String> betaMemberIds = betaMembers.stream()
+                .map(doc -> doc.getString("userID"))
+                .collect(Collectors.toList());
+
+        List<Member> adminMembers = guild.getMembers().stream()
+                .filter(member -> member.getRoles().stream()
+                        .anyMatch(role -> role.getName().equalsIgnoreCase("admin")))
+                .collect(Collectors.toList());
+
+        boolean isAdminBetaMember = adminMembers.stream()
+                .anyMatch(member -> betaMemberIds.contains(member.getId()));
+
+        if (isAdminBetaMember) {
+            logger.info("Cubow joined server " + event.getGuild().getName());
+        } else {
+            TextChannel textChannel = (TextChannel) guild.getDefaultChannel();
+
+            eb.setTitle("Cubow Bot");
+            eb.setDescription("Jemand hat gerade versucht, Cubow einzuladen, obwohl keiner der Administratoren dieses Servers am Cubow-Betaprogramm teilnimmt." +
+                    "Derzeit verfügen wir über eine begrenzte Bandbreite und müssen das Interesse an Cubow abschätzen. Daher gewähren wir derzeit nur Zugang zur Beta." +
+                    "\n\n" +
+                    "Wenn du Interesse an Betaplätzen oder allgemeinen Updates zu Cubow hast, kannst du unserem offiziellen Discord-Server beitreten. " +
+                    "Dort kannst du Cubow ausprobieren oder der Beta beitreten.");
+            eb.setColor(Color.MAGENTA);
+
+            textChannel.sendMessageEmbeds(eb.build())
+                    .setActionRow(Button.link("https://discord.gg/xHYD4Bm5x6", "Cubow Discord"))
+                    .queue();
+
+            guild.leave().queue();
         }
     }
 

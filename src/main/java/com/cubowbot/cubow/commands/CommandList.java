@@ -29,6 +29,7 @@ public class CommandList {
         TextCommands textCommands = new TextCommands();
         TicketCommands ticketCommands = new TicketCommands();
         FeedbackCommands feedbackCommands = new FeedbackCommands();
+        ConfigCommands configCommands = new ConfigCommands();
 
         // Context Menu
         ContextCommands contextCommands = new ContextCommands();
@@ -51,6 +52,7 @@ public class CommandList {
         commandList.addAll(ticketCommands.loadList());
         commandList.addAll(contextCommands.loadList());
         commandList.addAll(feedbackCommands.loadList());
+        commandList.addAll(configCommands.loadList());
 
         System.out.println(" ");
 

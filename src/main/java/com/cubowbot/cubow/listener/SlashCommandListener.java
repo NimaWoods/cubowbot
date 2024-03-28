@@ -14,9 +14,10 @@ public class SlashCommandListener extends ListenerAdapter {
     @Override
     public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
 
-        logger.info("\nExecuting Slash Command " + event.getName()
-                + " for user " + event.getMember().getEffectiveName()
-                + " on server " + event.getGuild().getName());
+        logger.info("\nExecuting Slash Command \"" + event.getName()
+                + "\" for subcommand \"" + event.getSubcommandName()
+                + "\" for user \"" + event.getMember().getEffectiveName()
+                + "\" on server \"" + event.getGuild().getName() + "\"");
 
         // Load Handler
         TextResponseHandler textResponseHandler = new TextResponseHandler(event);
@@ -28,6 +29,7 @@ public class SlashCommandListener extends ListenerAdapter {
         EmbedHandler embedHandler = new EmbedHandler(event);
         AICommandHandler aiCommandHandler = new AICommandHandler(event);
         FeedbackHandler feedbackHandler = new FeedbackHandler(event);
+        SubcommandListener subcommandListener = new SubcommandListener();
 
         ModalsHandler modals = new ModalsHandler();
 
@@ -61,6 +63,20 @@ public class SlashCommandListener extends ListenerAdapter {
             case "report":
                 moderationHandler.report();
                 break;
+        }
+
+        // setting
+        switch (event.getName()) {
+            case "options":
+                subcommandListener.options(event);
+            case "ticketoptions":
+                subcommandListener.ticketoptions(event);
+            case "notificationoptions":
+                subcommandListener.notificationoptions(event);
+        }
+
+        if (event.getName().equals("option")) {
+            subcommandListener.options(event);
         }
 
         //misc

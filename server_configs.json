@@ -9,7 +9,7 @@
       "Ticket_Title": "Craftex Support Ticket",
       "Ticket_Description": "Willkommen im Craftex Support!\n Ein Moderator wird sich schnellstmöglich um dein Problem kümmern.\n",
       "Ticket_Name": "",
-      "Ticket Q&A" : "",
+      "Ticket_Q&A" : "",
 
       "ticket_view_role_permission": "1052661922350248048, 1079231987090469016",
       "ticket_send_role_permission": "1052661922350248048, 1079231987090469016",
@@ -17,7 +17,9 @@
 
       "Moderation_Notification_Channel": "",
       "Report_Notification_Channel": "",
-      "Event_Notification_Channel":  "",
+      "Live_Notification_Channel":  "1053402810819018792",
+      "Offline_Notification_Channel":  "",
+
       "Rules" : "",
 
       "Welcome_Channel": "",
@@ -35,14 +37,12 @@
       "Twitch": "",
 
       "Mute_Role": "",
-      "Join_Autorole": "",
+      "Join_Autorole": "1052663439044120686",
       "Moderation_Roles": "1052661922350248048L, 1079231987090469016L",
 
       "paid": "false",
       "CHATGPT_Permissions": "ALL",
-      "ChatGPT_API_Token": "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",
-
-      "Q&A" : "0"
+      "ChatGPT_API_Token": "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"
     },
     "1217994812108832880": {
       "name": "Cubow Bot Support",
@@ -53,7 +53,6 @@
       "Ticket_Title": "Cubow Support Ticket",
       "Ticket_Description": "Willkommen im Cubow Support!\n Ein Moderator wird sich schnellstmöglich um dein Problem kümmern.\n",
       "Ticket_Name": "",
-      "Ticket Q&A" : "",
 
       "ticket_view_role_permission": "1218018045210005685",
       "ticket_send_role_permission": "1218018045210005685",
@@ -61,7 +60,6 @@
 
       "Moderation_Notification_Channel": "",
       "Report_Notification_Channel": "",
-      "Event_Notification_Channel":  "",
       "Rules" : "- Swiper nicht klauen",
 
       "Welcome_Channel": "1220056183700983942",
@@ -84,9 +82,7 @@
 
       "paid": "false",
       "CHATGPT_Permissions": "ALL",
-      "ChatGPT_API_Token": "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",
-
-      "Q&A" : "0"
+      "ChatGPT_API_Token": "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"
     }
   }
 }
