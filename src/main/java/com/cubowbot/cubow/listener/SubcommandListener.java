@@ -4,91 +4,93 @@ import com.cubowbot.cubow.handler.ConfigHandler;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 
 public class SubcommandListener {
+
+    ConfigHandler configHandler = new ConfigHandler();
+
     public void options(SlashCommandInteractionEvent event) {
 
         String subCommandName = event.getSubcommandName();
-
+        
         switch (subCommandName) {
             case "rules":
-                ConfigHandler configHandler = new ConfigHandler();
                 configHandler.saveOption(event);
             case "rule_channel":
-                System.out.println("TESSSSSSSSSST");
+                configHandler.saveOption(event);
             case "welcome_channel":
-                System.out.println("TESSSSSSSSSST");
+                configHandler.saveOption(event);
             case "welcome_message":
-                System.out.println("TESSSSSSSSSST");
+                configHandler.saveOption(event);
 
             case "goodbye_channel":
-                System.out.println("TESSSSSSSSSST");
+                configHandler.saveOption(event);
             case "goodbye_message":
-                System.out.println("TESSSSSSSSSST");
+                configHandler.saveOption(event);
 
             case "website":
-                System.out.println("TESSSSSSSSSST");
+                configHandler.saveOption(event);
             case "discord":
-                System.out.println("TESSSSSSSSSST");
+                configHandler.saveOption(event);
             case "twitter":
-                System.out.println("TESSSSSSSSSST");
+                configHandler.saveOption(event);
             case "instagram":
-                System.out.println("TESSSSSSSSSST");
+                configHandler.saveOption(event);
             case "facebook":
-                System.out.println("TESSSSSSSSSST");
+                configHandler.saveOption(event);
             case "youtube":
-                System.out.println("TESSSSSSSSSST");
+                configHandler.saveOption(event);
             case "twitch":
-                System.out.println("TESSSSSSSSSST");
+                configHandler.saveOption(event);
 
             case "mute_role":
-                System.out.println("TESSSSSSSSSST");
+                configHandler.saveOption(event);
             case "join_autorole":
-                System.out.println("TESSSSSSSSSST");
+                configHandler.saveOption(event);
             case "moderation_roles":
-                System.out.println("TESSSSSSSSSST");
+                configHandler.saveOption(event);
 
             case "chatgpt_permissions":
-                System.out.println("TESSSSSSSSSST");
+                configHandler.saveOption(event);
             case "chatgpt_api_token":
-                System.out.println("TESSSSSSSSSST");
+                configHandler.saveOption(event);
         }
     }
 
     public void ticketoptions(SlashCommandInteractionEvent event) {
         switch (event.getSubcommandName()) {
             case "ticket_channel":
-                System.out.println("TESSSSSSSSSST");
+                configHandler.saveOption(event);
             case "ticket_category":
-                System.out.println("TESSSSSSSSSST");
+                configHandler.saveOption(event);
             case "transcript_channel":
-                System.out.println("TESSSSSSSSSST");
+                configHandler.saveOption(event);
             case "ticket_title":
-                System.out.println("TESSSSSSSSSST");
+                configHandler.saveOption(event);
             case "ticket_description":
-                System.out.println("TESSSSSSSSSST");
+                configHandler.saveOption(event);
             case "ticket_name":
-                System.out.println("TESSSSSSSSSST");
+                configHandler.saveOption(event);
             case "ticket_q_and_a":
-                System.out.println("TESSSSSSSSSST");
+                configHandler.saveOption(event);
 
             case "mute_role":
-                System.out.println("TESSSSSSSSSST");
+                configHandler.saveOption(event);
             case "join_autorole":
-                System.out.println("TESSSSSSSSSST");
+                configHandler.saveOption(event);
             case "moderation_roles":
-                System.out.println("TESSSSSSSSSST");
+                configHandler.saveOption(event);
         }
     }
 
     public void notificationoptions(SlashCommandInteractionEvent event) {
         switch (event.getSubcommandName()) {
             case "moderation_notification_channel":
-                System.out.println("TESSSSSSSSSST");
+                configHandler.saveOption(event);
             case "report_notification_channel":
-                System.out.println("TESSSSSSSSSST");
+                configHandler.saveOption(event);
             case "live_notification_channel":
-                System.out.println("TESSSSSSSSSST");
+                configHandler.saveOption(event);
             case "offline_notification_channel":
-                System.out.println("TESSSSSSSSSST");
+                configHandler.saveOption(event);
         }
     }
 }
