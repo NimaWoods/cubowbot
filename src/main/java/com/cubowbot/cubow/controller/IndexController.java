@@ -15,10 +15,12 @@ public class IndexController {
         CubowApplication cubowApplication = new CubowApplication();
         JDA bot = cubowApplication.getJDA();
 
-        model.addAttribute("logo", bot.getSelfUser().getAvatarUrl());
+        if(bot.getStatus().name().equals("CONNECTED")) {
+            model.addAttribute("botStatus", "Online");
+        } else {
+            model.addAttribute("botStatus", bot.getStatus().name());
+        }
 
-        model.addAttribute("botName", bot.getSelfUser().getName());
-
-        return "index";
+        return "comingsoon";
     }
 }
