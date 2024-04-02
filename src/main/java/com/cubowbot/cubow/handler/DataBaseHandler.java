@@ -13,6 +13,7 @@ import org.bson.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,13 @@ public class DataBaseHandler {
     }
 
     public DataBaseHandler() {
-        String uri = "mongodb://admin:N1ma15tT01122!@5.45.109.197:27017/admin";
+        ConfigHandler configHandler = new ConfigHandler();
+        String uri = null;
+        try {
+            uri = configHandler.loadMongoLink();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         MongoClientSettings settings = MongoClientSettings.builder()
                 .applyConnectionString(new ConnectionString(uri))
                 .build();

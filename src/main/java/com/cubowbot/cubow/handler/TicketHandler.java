@@ -78,7 +78,8 @@ public class TicketHandler {
             embedGenerator.success(event, "Das Panel wurde erstellt " + message.getMessageReference(), true);
 
         } else {
-            logger.info("Channel " + channelId + " not found");
+            embedGenerator.failure(event, "Channel " + channelId + " wurde nicht gefunden. " +
+                    "\nEin Admin muss den Channel in der Config neu setzen", true);
         }
     }
 

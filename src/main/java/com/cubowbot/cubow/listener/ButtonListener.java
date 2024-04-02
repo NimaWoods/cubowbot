@@ -40,7 +40,7 @@ public class ButtonListener extends ListenerAdapter{
             case "ticket":
                 ticketHandler.createTicketButton(event);
                 break;
-            case "closeticket":
+            case "closeTicket":
 
                 EmbedBuilder embedBuilder = new EmbedBuilder();
                 embedBuilder.setTitle("Ticket schließen");

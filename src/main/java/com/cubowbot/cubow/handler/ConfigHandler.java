@@ -19,7 +19,7 @@ public class ConfigHandler {
         String result = null;
         try {
 
-            String fileName = "token.properties";
+            String fileName = "config.properties";
 
             File file = new File(fileName);
             if (!file.exists()) {
@@ -33,6 +33,36 @@ public class ConfigHandler {
 
                 // Holen des Werts für das Schlüsselwort
                 result = properties.getProperty("token");
+            }
+
+            if (result == null) {
+                throw new IllegalArgumentException("Token wurde nicht in " + fileName + " gefunden");
+            } else {
+                return result;
+            }
+        } catch (IOException e) {
+            throw new IOException(e);
+        }
+    }
+
+    public String loadMongoLink() throws IOException {
+        String result = null;
+        try {
+
+            String fileName = "config.properties";
+
+            File file = new File(fileName);
+            if (!file.exists()) {
+                throw new FileNotFoundException(fileName + " wurde im aktuellen Verzeichnis nicht gefunden");
+            } else {
+                // Lese den Inhalt der config.properties-Datei
+                Properties properties = new Properties();
+                FileInputStream fileInputStream = new FileInputStream(file);
+                properties.load(fileInputStream);
+                fileInputStream.close();
+
+                // Holen des Werts für das Schlüsselwort
+                result = properties.getProperty("mongoURI");
             }
 
             if (result == null) {
@@ -86,7 +116,7 @@ public class ConfigHandler {
 
     public void checkConfigs() {
         // Define the list of required files
-        String[] requiredFiles = {"token.properties", "colors.json"};
+        String[] requiredFiles = {"config.properties", "colors.json"};
 
         // Loop through each required file
         for (String fileName : requiredFiles) {
