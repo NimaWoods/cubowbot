@@ -43,6 +43,7 @@ public class TicketHandler {
 
 
     public void sendDashboard(Guild server) {
+        EmbedGenerator embedGenerator = new EmbedGenerator();
 
         String channelId = ConfigHandler.getServerConfig(server.getId(), "ticket_channel");
         TextChannel channel = server.getTextChannelById(channelId);
@@ -59,9 +60,12 @@ public class TicketHandler {
                 List<MessageEmbed> embeds = message.getEmbeds();
                 for (MessageEmbed messageEmbed : embeds) {
                     if (messageEmbed.getTitle().equals(embed.build().getTitle()) &&
-                            messageEmbed.getDescription().equals(embed.build().getDescription()) &&
-                            messageEmbed.getColor().equals(embed.build().getColor())) {
-                        return;
+                        messageEmbed.getDescription().equals(embed.build().getDescription()) &&
+                        messageEmbed.getColor().equals(embed.build().getColor())) {
+
+                            embedGenerator.failure(event, "Panel existiert bereits " + message.getMessageReference(), true);
+                            return;
+
                     }
                 }
             }
@@ -69,10 +73,9 @@ public class TicketHandler {
             MessageCreateAction messageAction = channel.sendMessageEmbeds(embed.build());
             Button button = Button.primary("ticket", "Ticket erstellen");
             messageAction.setActionRow(button);
-            messageAction.complete();
+            Message message = messageAction.complete();
 
-            // Todo Better Response
-            event.reply("success").setEphemeral(true).queue();
+            embedGenerator.success(event, "Das Panel wurde erstellt " + message.getMessageReference(), true);
 
         } else {
             logger.info("Channel " + channelId + " not found");

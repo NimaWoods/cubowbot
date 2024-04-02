@@ -14,7 +14,7 @@ import java.util.List;
 public class StatusController {
 
     @GetMapping("/status")
-    public String index(Model model) {
+    public String status(Model model) {
 
         CubowApplication cubowApplication = new CubowApplication();
         JDA bot = cubowApplication.getJDA();

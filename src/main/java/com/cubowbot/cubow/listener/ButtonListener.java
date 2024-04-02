@@ -39,6 +39,7 @@ public class ButtonListener extends ListenerAdapter{
         switch(event.getComponentId()) {
             case "ticket":
                 ticketHandler.createTicketButton(event);
+                break;
             case "closeticket":
 
                 EmbedBuilder embedBuilder = new EmbedBuilder();
@@ -49,10 +50,13 @@ public class ButtonListener extends ListenerAdapter{
                 event.replyEmbeds(embedBuilder.build())
                         .setActionRow(Button.success("closeConfirmButtonYes", "✓"), Button.danger("closeConfirmButtonNo", "X"))
                         .queue();
+                break;
             case "closeConfirmButtonYes":
                 ticketHandler.closeConfirmButtonYes(event);
+                break;
             case "closeConfirmButtonNo":
                 ticketHandler.closeConfirmButtonNo(event);
+                break;
             case "closerequestyes":
                 EmbedBuilder builder = new EmbedBuilder();
 
@@ -62,6 +66,7 @@ public class ButtonListener extends ListenerAdapter{
                         .queue();
 
                 event.getChannel().delete().queueAfter(3, TimeUnit.SECONDS);
+                break;
 
             case "closerequestno":
                 EmbedBuilder eb = new EmbedBuilder();
@@ -77,6 +82,7 @@ public class ButtonListener extends ListenerAdapter{
                         .queue();
 
                 //event.getMessage().delete().queueAfter(10, TimeUnit.SECONDS);
+                break;
             case "claim":
                 event.deferReply().queue();
 
@@ -137,6 +143,7 @@ public class ButtonListener extends ListenerAdapter{
                 } else {
                     event.getHook().editOriginal("Du hast nicht die Berechtigungen, diesen Befehl auszuführen.").queue();
                 }
+                break;
             case "unclaim":
                 event.deferReply().queue();
 
@@ -198,6 +205,7 @@ public class ButtonListener extends ListenerAdapter{
                 } else {
                     event.getHook().editOriginal("Du hast nicht die Berechtigungen, diesen Befehl auszuführen.").queue();
                 }
+                break;
 
             // Giveaway
             case "join":
@@ -234,10 +242,12 @@ public class ButtonListener extends ListenerAdapter{
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                break;
 
             case "betajoin":
                 BetaHandler betaHandler = new BetaHandler();
                 betaHandler.memberJoinedBeta(event);
+                break;
         }
     }  
 }

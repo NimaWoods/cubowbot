@@ -33,4 +33,5 @@ build/
 .vscode/
 
 ### properties ###
+/config.properties
 /token.properties
