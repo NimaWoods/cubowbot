@@ -14,7 +14,7 @@ public class TicketCommands {
 
         List<CommandData> commandList = Arrays.asList(
 
-                new CommandDataImpl("Ticket", "Create and Manage Tickets")
+                new CommandDataImpl("ticket", "Create and Manage Tickets")
                         .addSubcommands(new SubcommandData("create", "Create a Ticket"))
 
                         .addSubcommands(new SubcommandData("add", "Adds a User to a Ticket")
@@ -22,9 +22,6 @@ public class TicketCommands {
 
                         .addSubcommands(new SubcommandData("remove", "Removes a User from a Ticket")
                             .addOption(OptionType.USER, "user", "Member to transfer to", true))
-
-                        .addSubcommands(new SubcommandData("remove", "Removes a User from a Ticket")
-                            .addOption(OptionType.USER, "user", "User to remove", true))
 
                         .addSubcommands(new SubcommandData("claim", "Assigns a single staff member to a ticket"))
 

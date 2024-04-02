@@ -3,6 +3,7 @@ package com.cubowbot.cubow.listener;
 import com.cubowbot.cubow.CubowApplication;
 import com.cubowbot.cubow.handler.*;
 
+import com.cubowbot.cubow.handler.musicHandler.MusicHandler;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.slf4j.Logger;
@@ -29,6 +30,7 @@ public class SlashCommandListener extends ListenerAdapter {
         AICommandHandler aiCommandHandler = new AICommandHandler(event);
         FeedbackHandler feedbackHandler = new FeedbackHandler(event);
         SubcommandListener subcommandListener = new SubcommandListener();
+        MusicHandler musicHandler = new MusicHandler();
 
         ModalsHandler modals = new ModalsHandler();
 
@@ -64,14 +66,18 @@ public class SlashCommandListener extends ListenerAdapter {
             // setting
             case "options":
                 subcommandListener.options(event);
+                break;
             case "ticketoptions":
                 subcommandListener.ticketoptions(event);
+                break;
             case "notificationoptions":
                 subcommandListener.notificationoptions(event);
+                break;
 
             // options
             case "option":
                 subcommandListener.options(event);
+                break;
 
             //misc
             case "avatar":
@@ -88,9 +94,14 @@ public class SlashCommandListener extends ListenerAdapter {
                 break;
             case "coinflip":
                 miscHandler.coinflip();
+                break;
 
             // Help Commands Handler
-            case "commands", "help":
+            case "commands":
+                commandHandler.help();
+                break;
+
+            case "help":
                 commandHandler.help();
                 break;
 
@@ -129,6 +140,11 @@ public class SlashCommandListener extends ListenerAdapter {
                 break;
             case "suggest":
                 feedbackHandler.suggest();
+                break;
+
+            // Music
+            case "play":
+                musicHandler.play(event);
                 break;
         }
     }

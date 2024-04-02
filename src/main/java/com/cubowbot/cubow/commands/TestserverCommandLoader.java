@@ -1,6 +1,8 @@
 package com.cubowbot.cubow.commands;
 
 import com.cubowbot.cubow.CubowApplication;
+import com.cubowbot.cubow.commands.CommandLists.TicketCommands;
+import com.sedmelluq.discord.lavaplayer.remote.RemoteNode;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
@@ -22,14 +24,12 @@ public class TestserverCommandLoader {
 
         Guild Testserver = bot.getGuildById("1217994812108832880");
 
-        List<CommandData> commandList = List.of(
-
-            //new CommandDataImpl("sendwelcometest", "Test");
-        );
+        List<CommandData> commandList = new java.util.ArrayList<> (List.of(
+        ));
 
         // Testserver
         // Activate while Debugging by changing false to true
-        if (commandList != null) {
+        if (!commandList.isEmpty()) {
             Testserver.updateCommands().addCommands(commandList).queue(
                     success -> logger.info("Registered all commands on Testserver " + Testserver.getName()),
                     failure -> logger.info("Failed to register commands on Testserver..." + failure)
