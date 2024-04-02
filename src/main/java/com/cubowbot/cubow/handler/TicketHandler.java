@@ -36,6 +36,12 @@ public class TicketHandler {
         this.event = event;
     }
 
+    public void createTicketButton(ButtonInteractionEvent event) {
+        ModalsHandler modals = new ModalsHandler();
+        modals.generateTicket(event, null);
+    }
+
+
     public void sendDashboard(Guild server) {
 
         String channelId = ConfigHandler.getServerConfig(server.getId(), "ticket_channel");
