@@ -76,7 +76,7 @@ public class EventListener extends ListenerAdapter {
         embedBuilder.setColor(Color.MAGENTA);
         event.getGuild().getDefaultChannel().asTextChannel().sendMessageEmbeds(embedBuilder.build())
                 .setActionRow(Button.link("https://discord.com/oauth2/authorize?client_id=1217485873508253839", "Cubow einladen"),
-                        Button.link("https://discord.gg/xHYD4Bm5x6", "Cubow Discord Server"))
+                              Button.link("https://discord.gg/xHYD4Bm5x6", "Cubow Discord Server"))
                 .queue();
     }
 
