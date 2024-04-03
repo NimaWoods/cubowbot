@@ -460,6 +460,8 @@ public class TicketHandler {
         ebPanel.setDescription(description);
         ebPanel.addField("Status", "\uD83D\uDFE2 Offen", true);
         ebPanel.addField("Ticket Beschreibung", ticketContext, true);
+        ebPanel.addField("Created by", member.getAsMention(), false);
+        ebPanel.addField("Ticket Moderators", mentionBuilder.toString() , true);
 
         MessageCreateAction messageAction = channel.sendMessageEmbeds(ebPanel.build());
 
