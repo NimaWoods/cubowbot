@@ -2,7 +2,6 @@ package com.cubowbot.cubow.commands;
 
 import com.cubowbot.cubow.CubowApplication;
 import com.cubowbot.cubow.commands.CommandLists.*;
-import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +28,7 @@ public class CommandList {
         TextCommands textCommands = new TextCommands();
         TicketCommands ticketCommands = new TicketCommands();
         FeedbackCommands feedbackCommands = new FeedbackCommands();
-        ConfigCommands configCommands = new ConfigCommands();
+        OptionCommands optionCommands = new OptionCommands();
 
         // Context Menu
         ContextCommands contextCommands = new ContextCommands();
@@ -52,7 +51,7 @@ public class CommandList {
         commandList.addAll(ticketCommands.loadList());
         commandList.addAll(contextCommands.loadList());
         commandList.addAll(feedbackCommands.loadList());
-        commandList.addAll(configCommands.loadList());
+        commandList.addAll(optionCommands.loadList());
 
         System.out.println(" ");
 

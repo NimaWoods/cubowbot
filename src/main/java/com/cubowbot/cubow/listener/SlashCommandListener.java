@@ -31,6 +31,7 @@ public class SlashCommandListener extends ListenerAdapter {
         FeedbackHandler feedbackHandler = new FeedbackHandler(event);
         SubcommandListener subcommandListener = new SubcommandListener();
         MusicHandler musicHandler = new MusicHandler();
+        ConfigHandler configHandler = new ConfigHandler();
 
         ModalsHandler modals = new ModalsHandler();
 
@@ -63,20 +64,15 @@ public class SlashCommandListener extends ListenerAdapter {
                 moderationHandler.report();
                 break;
 
-            // setting
+            // settings
             case "options":
-                subcommandListener.options(event);
+                configHandler.saveOption(event);
                 break;
             case "ticketoptions":
-                subcommandListener.ticketoptions(event);
+                configHandler.saveOption(event);
                 break;
             case "notificationoptions":
-                subcommandListener.notificationoptions(event);
-                break;
-
-            // options
-            case "option":
-                subcommandListener.options(event);
+                configHandler.saveOption(event);
                 break;
 
             //misc

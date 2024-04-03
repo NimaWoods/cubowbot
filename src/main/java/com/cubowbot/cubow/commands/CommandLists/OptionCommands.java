@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ConfigCommands {
+public class OptionCommands {
 
     public List<CommandData> loadList() {
         List<CommandData> commandList = new ArrayList<>(Arrays.asList(
@@ -21,14 +21,14 @@ public class ConfigCommands {
                                         .addOption(OptionType.CHANNEL, "rule_channel", "\\n for new line"),
 
                                 new SubcommandData("welcome_channel", "Welcome Channel")
-                                        .addOption(OptionType.CHANNEL, "welcomechannel", "test"),
+                                        .addOption(OptionType.CHANNEL, "welcome_channel", "test"),
                                 new SubcommandData("welcome_message", "Welcome Message")
-                                        .addOption(OptionType.STRING, "welcomemessage", "Welcome Message"),
+                                        .addOption(OptionType.STRING, "welcome_message", "Welcome Message"),
 
                                 new SubcommandData("goodbye_channel", "Goodbye Channel")
-                                        .addOption(OptionType.CHANNEL, "goodbyechannel", "Goodbye Channel"),
+                                        .addOption(OptionType.CHANNEL, "goodbye_channel", "Goodbye Channel"),
                                 new SubcommandData("goodbye_message", "Goodbye Message")
-                                        .addOption(OptionType.STRING, "goodbyemessage", "Goodbye Message"),
+                                        .addOption(OptionType.STRING, "goodbye_message", "Goodbye Message"),
 
                                 new SubcommandData("website", "Your Website Link")
                                         .addOption(OptionType.STRING, "website", "Your Website Link"),
@@ -46,11 +46,11 @@ public class ConfigCommands {
                                         .addOption(OptionType.STRING, "twitch", "Your Twitch Link"),
 
                                 new SubcommandData("mute_role", "Mute Role")
-                                        .addOption(OptionType.ROLE, "muterole", "Mute Role"),
+                                        .addOption(OptionType.ROLE, "mute_role", "Mute Role"),
                                 new SubcommandData("join_autorole", "Autorole")
-                                        .addOption(OptionType.ROLE, "joinautorole", "Autorole"),
+                                        .addOption(OptionType.ROLE, "join_autorole", "Autorole"),
                                 new SubcommandData("moderation_roles", "Mod Role")
-                                        .addOption(OptionType.ROLE, "moderationroles", "Mod Role"),
+                                        .addOption(OptionType.ROLE, "moderation_roles", "Mod Role"),
 
                                 new SubcommandData("chatgpt_permissions", "ALL/ADMIN/OWNER")
                                     .addOption(OptionType.STRING, "chatgpt_permissions", "ALL/ADMIN/OWNER"),
@@ -61,9 +61,9 @@ public class ConfigCommands {
                 new CommandDataImpl("ticketoptions", "Set every ticket Option for your server")
                         .addSubcommands(Arrays.asList(
                                 new SubcommandData("ticket_channel", "Channel for the Ticket Panel")
-                                        .addOption(OptionType.CHANNEL, "ticket_channel_id", "Channel for the Ticket Panel"),
+                                        .addOption(OptionType.CHANNEL, "ticket_channel", "Channel for the Ticket Panel"),
                                 new SubcommandData("ticket_category", "Category where Tickets get created")
-                                        .addOption(OptionType.NUMBER, "ticket_channel_id", "Channel for the Ticket Panel"),
+                                        .addOption(OptionType.NUMBER, "ticket_category", "Channel for the Ticket Panel"),
                                 new SubcommandData("transcript_channel", "Transkript Channel")
                                         .addOption(OptionType.CHANNEL, "transcript_channel", "Transkript Channel"),
                                 new SubcommandData("ticket_title", "Ticket Titel")

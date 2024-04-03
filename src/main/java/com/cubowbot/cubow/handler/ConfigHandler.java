@@ -141,7 +141,10 @@ public class ConfigHandler {
         DataBaseHandler dataBaseHandler = new DataBaseHandler();
         String guildId = event.getGuild().getId();
         String subcommandName = event.getSubcommandName();
-        String optionValue = event.getOption(subcommandName).getAsString();
+        String optionValue = event.getOption(subcommandName).toString();
+
+        System.out.println(optionValue);
+
 
         // Überprüfen, ob das Dokument existiert
         Document existingDocument = dataBaseHandler.getDocument("serverconfigs", guildId);
