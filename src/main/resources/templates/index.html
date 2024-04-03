@@ -1,68 +1,363 @@
+<!--
+  | Website designed by JstnLT (https://jstnlt.my.id)
+  | This project is open source: https://github.com/JastinXyz/discord-bot-landing-page-web
+-->
+
 <!DOCTYPE html>
-<html lang="de" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Cubow Bot</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="icon" type="image/x-icon" href="https://cdn.discordapp.com/icons/1217994812108832880/cc6dccfe0330c61a2640c328d28fefb6.webp?size=256">
-</head>
+    <link rel="stylesheet" href="assets/css/bulma.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+    <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/scale.css" />
+    
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
 
-<body class = "theme-dark chrome">
-    <header id="main-header">
-        <div id="logo-header">
-            <a href="/">
-                <img th:src="${logo}">
-                Cubow
-            </a>
+    <script src="assets/js/jquery-3.6.0.js"></script>
+  </head>
+  <body>
+    <!-- Back To Top Start -->
+    <a id="backtotop" data-tippy-content="Back To Top.">
+      <i class="fa-solid fa-angle-up has-text-white fa-2xl mt-5"></i>
+    </a>
+    <!-- Back To Top End -->
+
+    <!-- Navbar Start -->
+    <nav
+      class="navbar is-fixed-top"
+      role="navigation"
+      aria-label="main navigation"
+    >
+      <div class="navbar-brand mt-2 mb-2">
+        <a class="navbar-item" href="/">
+
+
+          <img
+            th:src="${logo}"
+            width="28"
+            height="28"
+          />
+          <strong>Cubow</strong>
+        </a>
+
+        <a
+          role="button"
+          class="navbar-burger has-text-white"
+          data-target="navMenu"
+          aria-label="menu"
+          aria-expanded="false"
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+          <a href="#" class="navbar-item is-tab">
+            Home
+          </a>
+
+          <a href="#features" class="navbar-item is-tab">
+            Features
+          </a>
+
+          <a href="#stats" class="navbar-item is-tab">
+            Stats
+          </a>
+
+          <a href="#" class="navbar-item is-tab">
+            Docs
+          </a>
         </div>
 
-        <div id="navbar">
-            <a href="../static/docs">
-                <i class="fa-solid fa-book"></i>
-                Docs
-            </a>
+        <div class="navbar-end">
+          <a href="#" class="navbar-item is-tab" target="_blank">
+            <i class="fa-brands fa-discord"></i>
+          </a>
 
-            <a href="https://discord.com/oauth2/authorize?client_id=1217485873508253839">
-                <i class="fa-solid fa-plus"></i>
-                Invite
-            </a>
+          <a href="#" class="navbar-item is-tab" target="_blank">
+            <i class="fa-brands fa-github"></i>
+          </a>
 
-            <a href="https://discord.gg/CdcfrMZhmf">
-                <i class="fa-brands fa-discord"></i>
-                Discord
-            </a>
+          <div class="navbar-item">
+            <div class="buttons">
+              <a href="https://discord.com/oauth2/authorize?client_id=1217485873508253839&response_type=code&redirect_uri=https%3A%2F%2Fcubow.nimawoods.de%2Foauth2%2Fcallback%2Fdiscord&scope=guilds+email" class="button is-blurple">
+                <strong
+                  ><i class="fa-solid fa-right-to-bracket mr-2"></i>
+                  Login</strong
+                >
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- Navbar End -->
 
-            <a>
-                <i class="fa-brands fa-twitch"></i>
-                Twitch Bot
-            </a>
+    <!-- Hero Section Start -->
+    <section class="hero bg-base is-fullheight">
+      <div class="hero-body">
+        <div class="">
+          <div class="columns">
+            <div class="column mr-6 mt-12" data-aos="fade-up">
+              <p class="title has-text-white has-text-weight-bold">
+               The only Discord Bot, you'll ever need
+              </p>
+              <p class="subtitle has-text-grey-light is-size-6 mt-3">
+                Meet our multi-purpose Discord Bot, from moderation and entertainment to utilities and beyond.
+                With unparalleled compatibility and a plethora of features,
+                it's the only bot you'll ever need to elevate your Discord server to new heights of functionality and engagement.
+              </p>
+              <div class="buttons">
+                <a href="https://discord.com/oauth2/authorize?client_id=1217485873508253839" class="button is-info">
+                  <strong>Add To Discord</strong>
+                </a>
 
-            <a>
-                <i class="fa-brands fa-youtube"></i>
-                Youtube Bot
-            </a>
+                <!--<a href="#" class="button is-primary is-outlined">
+                  <strong><i class="fa-solid fa-crown"></i> Premium</strong>
+                </a>-->
+              </div>
+            </div>
+            <div class="column mt-6" data-aos="fade-left">
+              <img
+                class="image has-image-centered vert-move mt-4"
+                th:src="${logo}"
+                alt="hero image"
+                style="width: 20rem;"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="has-text-centered" data-tippy-content="Scroll Down">
+        <a href="#features"
+          ><i
+            class="fa-solid fa-circle-chevron-down fa-lg vert-move2 has-text-white"
+          ></i
+        ></a>
+      </div>
+    </section>
+    <!-- Hero Section End -->
 
-            <a href="status">
-                <i class="fa-solid fa-chart-simple"></i>
-                Status
-            </a>
+    <!-- Hero Waves Start -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+      <path
+        fill="#1a2634"
+        fill-opacity="1"
+        d="M0,288L24,261.3C48,235,96,181,144,154.7C192,128,240,128,288,149.3C336,171,384,213,432,202.7C480,192,528,128,576,133.3C624,139,672,213,720,213.3C768,213,816,139,864,101.3C912,64,960,64,1008,106.7C1056,149,1104,235,1152,240C1200,245,1248,171,1296,144C1344,117,1392,139,1416,149.3L1440,160L1440,0L1416,0C1392,0,1344,0,1296,0C1248,0,1200,0,1152,0C1104,0,1056,0,1008,0C960,0,912,0,864,0C816,0,768,0,720,0C672,0,624,0,576,0C528,0,480,0,432,0C384,0,336,0,288,0C240,0,192,0,144,0C96,0,48,0,24,0L0,0Z"
+      ></path>
+    </svg>
+    <!-- Hero Waves End -->
+
+    <!-- Features Section Start -->
+    <section id="features" class="section mt-6">
+      <div class="has-text-centered">
+        <h1 class="title lined">Features</h1>
+        <div class="line line-center blurple"></div>
+      </div>
+
+      <!-- single feature start (Left) -->
+      <div class="single-feature">
+        <div class="columns mt-6">
+          <div class="column mr-6">
+            <h4 class="title">Feature <span class="blurple">#1</span></h4>
+            <p class="subtitle mt-3">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat.
+            </p>
+          </div>
+          <div class="column" data-aos="fade-left">
+            <img
+              class="image has-image-centered"
+              src="assets/img/features1.svg"
+              alt="feature1 img"
+              style="width: 23rem;"
+            />
+          </div>
+        </div>
+      </div>
+      <!-- single feature end (Left) -->
+
+      <!-- single feature start (Right) -->
+      <div class="single-feature">
+        <div class="columns mt-6">
+          <div class="column" data-aos="fade-right">
+            <img
+              class="image has-image-centered"
+              src="assets/img/features2.svg"
+              alt="feature1 img"
+              style="width: 23rem;"
+            />
+          </div>
+          <div class="column">
+            <h4 class="title">
+              Feature <span class="has-text-primary">#2</span>
+            </h4>
+            <p class="subtitle mt-3">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- single feature end (Right) -->
+
+      <!-- single feature start (Left) -->
+      <div class="single-feature">
+        <div class="columns mt-6">
+          <div class="column mr-6">
+            <h4 class="title">
+              Feature <span class="has-text-warning">#3</span>
+            </h4>
+            <p class="subtitle mt-3">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat.
+            </p>
+          </div>
+          <div class="column" data-aos="fade-left">
+            <img
+              class="image has-image-centered"
+              src="assets/img/features3.svg"
+              alt="feature1 img"
+              style="width: 23rem;"
+            />
+          </div>
+        </div>
+      </div>
+      <!-- single feature end (Left) -->
+
+      <!-- single feature start (Right) -->
+      <div class="single-feature">
+        <div class="columns mt-6">
+          <div class="column" data-aos="fade-right">
+            <img
+              class="image has-image-centered"
+              src="assets/img/features4.svg"
+              alt="feature1 img"
+              style="width: 23rem;"
+            />
+          </div>
+          <div class="column">
+            <h4 class="title">Feature <span class="has-text-info">#4</span></h4>
+            <p class="subtitle mt-3">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- single feature end (Right) -->
+    </section>
+    <!-- Features Section End -->
+
+    <!-- Stats Section Start -->
+    <section id="stats" class="section mt-6">
+      <div class="has-text-centered">
+        <h1 class="title lined">Stats</h1>
+        <div class="line line-center blurple"></div>
+      </div>
+
+      <div class="columns mt-6">
+        <div class="column has-text-centered">
+          <p class="title has-text-weight-bold lined" th:text="${guilds}"></p>
+          <span class="subtitle has-text-weight-bold blurple"><i class="fa-solid fa-server"></i> Servers</span>
         </div>
 
-        <div id="header-placeholder"></div>
-
-        <div id="right-navbar">
-            <a href="https://discord.com/oauth2/authorize?client_id=1217485873508253839&response_type=code&redirect_uri=http%3A%2F%2F5.45.109.197%3A8001%2Flogin&scope=identify+guilds+guilds.members.read">
-                <i class="fa-solid fa-right-to-bracket"></i>
-                Login
-            </a>
+        <div class="column has-text-centered">
+          <p class="title has-text-weight-bold lined" th:text="${commands}"></p>
+          <span class="subtitle has-text-weight-bold blurple"><i class="fa-solid fa-terminal"></i> Commands</span>
         </div>
 
-    </header>
-    <div id="placeholder"></div>
-    <main>
-        <h1>Cubow Bot</h1>
-        <img th:src="${logo}">
-    </main>
-</body>
+        <div class="column has-text-centered">
+          <p class="title has-text-weight-bold lined" th:text="${user}"></p>
+          <span class="subtitle has-text-weight-bold blurple"><i class="fa-solid fa-users"></i> Users</span>
+        </div>
+      </div>
+    </section>
+    <!-- Stats Section End -->
+
+    <!-- Invite Section Start -->
+    <section class="section mt-6">
+      <div class="columns">
+        <div class="column has-text-left">
+          <p class="title has-text-weight-bold">
+            Ready to try <span class="blurple">Cubow</span>?
+          </p>
+          <p class="subtitle mt-3 has-text-gray">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <a href="#" class="button is-blurple is-medium"
+            ><strong><i class="fa-solid fa-book"></i> Get Started</strong></a
+          >
+        </div>
+
+        <div class="column"></div>
+      </div>
+    </section>
+    <!-- Invite Section End -->
+
+    <!-- Footer Section Start -->
+    <footer class="footer bg-base">
+      <div class="content has-text-centered has-text-white">
+        <div class="mb-2">
+          <a href="https://discord.gg/r9rRX2QcZe" class="has-text-white" target="_blank">
+            <i class="fa-brands fa-discord"></i>
+          </a>
+          &nbsp; &nbsp;
+          <!-- <a href="#" class="has-text-white" target="_blank">
+            <i class="fa-brands fa-github"></i>
+          </a>-->
+        </div>
+
+        <p>
+          <span class="has-text-weight-bold">Cubow</span>
+          <br />
+          &copy; <span id="cp-year"></span> Copyright Nima Woods. All Rights
+          Reserved.
+        </p>
+
+        <p style="letter-spacing: 0.1em;" class="is-uppercase">
+          Website Designed By
+          <a
+            href="https://jstnlt.my.id"
+            class="blurple has-text-weight-bold"
+            target="_blank"
+            >JstnLT</a
+          >.<br>The Original Website Design is Open Source on <a
+            href="https://github.com/JastinXyz/discord-bot-landing-page-web"
+            class="blurple has-text-weight-bold"
+            target="_blank"
+            >Github</a
+          >
+        </p>
+      </div>
+    </footer>
+    <!-- Footer Section End -->
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <script src="assets/js/script.js"></script>
+  </body>
 </html>
