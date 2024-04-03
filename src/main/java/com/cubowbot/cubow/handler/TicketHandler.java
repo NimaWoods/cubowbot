@@ -11,6 +11,8 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.entities.MessageEmbed.Field;
+import net.dv8tion.jda.api.entities.MessageHistory;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
@@ -161,14 +163,36 @@ public class TicketHandler {
     public void closeConfirmButtonYes(ButtonInteractionEvent event) {
 
         event.reply("Ticket wird von " + event.getMember().getAsMention() + " geschlossen").queue();
+        toTranscript(event.getChannel().asTextChannel(), event.getGuild());
 
-        if(event.getChannel().getType().toString().equals("TextChannel")) {
-            toTranscript(event.getChannel().asTextChannel(), event.getGuild());
-        } else {
-            logger.error("[Close Ticket] Channel " + event.getChannel() + " is not an TextChannel");
-        }
+        event.getChannel().getHistoryFromBeginning(1).queue(
+                history -> {
+                    Message firstMsg = history.getRetrievedHistory().get(0);
+                    List<MessageEmbed> embeds = firstMsg.getEmbeds();
+                    if (!embeds.isEmpty()) {
+                        MessageEmbed firstEmbed = embeds.get(0);
+                        String createdBy = null;
+                        List<Field> fields = firstEmbed.getFields();
+                        for (Field field : fields) {
+                            if (field.getName().equals("Created by")) {
+                                createdBy = field.getValue();
+                                break;
+                            }
+                        }
+                        if (createdBy != null) {
+                            System.out.println("Created by: " + createdBy);
+                        } else {
+                            System.out.println("No 'Created by' field found.");
+                        }
+                    } else {
+                        System.out.println("No embeds found in the message.");
+                    }
+                }
+        );
+
 
         event.getChannel().delete().queueAfter(5, TimeUnit.SECONDS);
+
     }
 
     public void claim() {
@@ -460,6 +484,8 @@ public class TicketHandler {
         ebPanel.setDescription(description);
         ebPanel.addField("Status", "\uD83D\uDFE2 Offen", true);
         ebPanel.addField("Ticket Beschreibung", ticketContext, true);
+        ebPanel.addField("Created by", member.getAsMention(), false);
+        ebPanel.addField("Ticket Moderators", mentionBuilder.toString() , true);
 
         MessageCreateAction messageAction = channel.sendMessageEmbeds(ebPanel.build());
 
