@@ -39,7 +39,9 @@ public class EmbedHandler {
     public void embedcreate() {
         Member member = event.getMember();
 
-        if (member.getRoles().stream().anyMatch(role -> role.getId().equals("1079231987090469016"))) {
+        String moderatorRole = ConfigHandler.getServerConfig(event.getGuild().getId(),"Moderation_Roles");
+
+        if (member.getRoles().stream().anyMatch(role -> role.getId().equals(moderatorRole))) {
 
             // Send "Bot is thinking..."
             event.deferReply().setEphemeral(true).queue();
