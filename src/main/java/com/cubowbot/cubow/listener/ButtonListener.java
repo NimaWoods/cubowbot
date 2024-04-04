@@ -10,9 +10,8 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import com.cubowbot.cubow.handler.BetaHandler;
-import com.cubowbot.cubow.handler.ModalsHandler;
-import com.cubowbot.cubow.handler.TicketHandler;
+import com.cubowbot.cubow.handler.discord.BetaHandler;
+import com.cubowbot.cubow.handler.discord.TicketHandler;
 import net.dv8tion.jda.api.entities.*;
 import org.json.JSONArray;
 import org.json.JSONObject;

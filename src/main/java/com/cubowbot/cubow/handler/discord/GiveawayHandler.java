@@ -1,4 +1,4 @@
-package com.cubowbot.cubow.handler;
+package com.cubowbot.cubow.handler.discord;
 
 import java.awt.Color;
 import java.nio.file.Files;

@@ -1,6 +1,11 @@
-package com.cubowbot.cubow.handler;
+package com.cubowbot.cubow.handler.discord;
 
+import com.cubowbot.cubow.handler.discord.music.TrackScheduler;
 import com.cubowbot.cubow.listener.*;
+import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
+import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
+import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager;
+import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -79,62 +84,6 @@ public class BotHandler extends Thread {
         builder.enableCache(enumSet);
 
         return builder;
-    }
-
-    public void run() {
-        String line = "";
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-    
-        try {
-            while((line = reader.readLine()) != null) {
-    
-                if(line.equalsIgnoreCase("exit")) {
-                    logger.info("System Exit..");
-                    System.exit(0);
-                }
-
-                if (line.equalsIgnoreCase("restart")) {
-                    new RestartBot();
-                }
-
-                if(line.equalsIgnoreCase("restart")) {
-                    try {
-                        // Pfad zur Java-Anwendung
-                        String javaPath = "/usr/bin/java"; // Der Pfad zu Ihrer Java-Installation
-                        String classPath = "com.cubowbot.cubow.Main"; // Der Hauptklasse Ihrer Anwendung
-
-                        // Erstellen Sie ein ProcessBuilder-Objekt
-                        ProcessBuilder builder = new ProcessBuilder();
-
-                        // Setzen Sie das Kommando zum Starten der Java-Anwendung
-                        builder.command(javaPath, "-cp", "your_classpath", classPath); // Ersetzen Sie "your_classpath" durch den tatsächlichen Klassenpfad Ihrer Anwendung
-
-                        // Starten Sie den Prozess
-                        Process process = builder.start();
-
-                        // Warten Sie, bis der Prozess beendet ist
-                        int exitCode = process.waitFor();
-
-                        // Überprüfen Sie den Exit-Code
-                        if (exitCode == 0) {
-                            logger.info("Application restarted successfully");
-                            // Beenden Sie die aktuelle Anwendung
-                            System.exit(0);
-                        } else {
-                            logger.info("Application restart failed with exit code: " + exitCode);
-                        }
-                    } catch (IOException e) {
-                        logger.info("Error restarting application: " + e.getMessage());
-                    } catch (InterruptedException e) {
-                        // Handle the InterruptedException
-                        Thread.currentThread().interrupt(); // Preserve interrupt status
-                        logger.info("Application restart interrupted");
-                    }
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public void initializeActivity(JDA bot) {

@@ -1,4 +1,4 @@
-package com.cubowbot.cubow.handler;
+package com.cubowbot.cubow.handler.discord;
 
 import com.cubowbot.cubow.CubowApplication;
 import com.cubowbot.cubow.generator.ImageGenerator;

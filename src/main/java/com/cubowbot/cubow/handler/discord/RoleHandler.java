@@ -1,4 +1,4 @@
-package com.cubowbot.cubow.handler;
+package com.cubowbot.cubow.handler.discord;
 
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Role;

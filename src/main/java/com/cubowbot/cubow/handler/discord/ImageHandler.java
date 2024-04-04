@@ -1,4 +1,4 @@
-package com.cubowbot.cubow.handler;
+package com.cubowbot.cubow.handler.discord;
 
 import com.cubowbot.cubow.CubowApplication;
 import net.dv8tion.jda.api.JDA;

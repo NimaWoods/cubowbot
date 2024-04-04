@@ -1,4 +1,4 @@
-package com.cubowbot.cubow.handler;
+package com.cubowbot.cubow.handler.discord;
 
 import com.cubowbot.cubow.CubowApplication;
 import com.fasterxml.jackson.databind.JsonNode;

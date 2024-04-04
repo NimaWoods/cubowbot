@@ -1,9 +1,7 @@
 package com.cubowbot.cubow.listener;
 
-import com.cubowbot.cubow.CubowApplication;
-import com.cubowbot.cubow.handler.*;
-
-import com.cubowbot.cubow.handler.musicHandler.MusicHandler;
+import com.cubowbot.cubow.handler.discord.*;
+import com.cubowbot.cubow.handler.discord.music.MusicHandler;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.slf4j.Logger;
@@ -30,7 +28,7 @@ public class SlashCommandListener extends ListenerAdapter {
         AICommandHandler aiCommandHandler = new AICommandHandler(event);
         FeedbackHandler feedbackHandler = new FeedbackHandler(event);
         SubcommandListener subcommandListener = new SubcommandListener();
-        MusicHandler musicHandler = new MusicHandler();
+        MusicHandler musicHandler = new MusicHandler(event);
         ConfigHandler configHandler = new ConfigHandler();
 
         ModalsHandler modals = new ModalsHandler();
@@ -140,8 +138,14 @@ public class SlashCommandListener extends ListenerAdapter {
 
             // Music
             case "play":
-                musicHandler.play(event);
+                musicHandler.play();
                 break;
+
+            // Voice Channel
+            case "join":
+                musicHandler.join();
+            case "leave":
+                musicHandler.leave();
         }
     }
 }

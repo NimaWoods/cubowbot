@@ -1,4 +1,4 @@
-package com.cubowbot.cubow.handler;
+package com.cubowbot.cubow.handler.discord;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

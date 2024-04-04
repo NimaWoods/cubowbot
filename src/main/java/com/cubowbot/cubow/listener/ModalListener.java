@@ -1,6 +1,6 @@
 package com.cubowbot.cubow.listener;
 
-import com.cubowbot.cubow.handler.TicketHandler;
+import com.cubowbot.cubow.handler.discord.TicketHandler;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;

@@ -1,4 +1,4 @@
-package com.cubowbot.cubow.handler;
+package com.cubowbot.cubow.handler.discord;
 
 import com.cubowbot.cubow.generator.EmbedGenerator;
 import net.dv8tion.jda.api.EmbedBuilder;

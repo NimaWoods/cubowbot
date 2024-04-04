@@ -1,7 +1,7 @@
 package com.cubowbot.cubow;
 
 import com.cubowbot.cubow.commands.CommandList;
-import com.cubowbot.cubow.handler.*;
+import com.cubowbot.cubow.handler.discord.*;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Guild;
