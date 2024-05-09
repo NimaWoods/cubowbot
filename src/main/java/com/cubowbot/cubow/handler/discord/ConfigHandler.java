@@ -4,8 +4,6 @@ import com.cubowbot.cubow.CubowApplication;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
-import org.bson.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
