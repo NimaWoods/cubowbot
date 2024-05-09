@@ -72,7 +72,8 @@ public class BetaHandler {
     }
 
     public void memberJoinedBeta(ButtonInteractionEvent event ) {
-        CubowApplication cubowApplication = new CubowApplication();
+        // TODO add with Database
+       /* CubowApplication cubowApplication = new CubowApplication();
         JDA bot = cubowApplication.getJDA();
 
         event.deferReply().setEphemeral(true).queue();
@@ -123,11 +124,11 @@ public class BetaHandler {
             event.getHook().editOriginalEmbeds(eb.build())
                     .setActionRow(Button.link("https://cubow.nimawoods.de/invite", "Cubow einladen"))
                     .queue();
-        }
+        } */
     }
 
     public void joinedServer(GuildJoinEvent event) {
-        DataBaseHandler dataBaseHandler = new DataBaseHandler();
+        /* DataBaseHandler dataBaseHandler = new DataBaseHandler();
         EmbedBuilder eb = new EmbedBuilder();
 
         Guild guild = event.getGuild();
@@ -163,7 +164,7 @@ public class BetaHandler {
                     .queue();
 
             guild.leave().queue();
-        }
+        }*/
     }
 
 }

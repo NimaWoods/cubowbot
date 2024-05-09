@@ -45,7 +45,7 @@ public class ConfigHandler {
         }
     }
 
-    public String loadMongoLink() throws IOException {
+    public String loadDatabaseLink() throws IOException {
         String result = null;
         try {
 
@@ -134,30 +134,6 @@ public class ConfigHandler {
                     e.printStackTrace();
                 }
             }
-        }
-    }
-
-    public void saveOption(SlashCommandInteractionEvent event) {
-        DataBaseHandler dataBaseHandler = new DataBaseHandler();
-        String guildId = event.getGuild().getId();
-        String subcommandName = event.getSubcommandName();
-        String optionValue = event.getOption(subcommandName).toString();
-
-        System.out.println(optionValue);
-
-
-        // Überprüfen, ob das Dokument existiert
-        Document existingDocument = dataBaseHandler.getDocument("serverconfigs", guildId);
-        if (existingDocument == null) {
-            // Wenn das Dokument nicht existiert, ein neues erstellen
-            Document serverconfig = new Document()
-                    .append("serverID", guildId)
-                    .append(subcommandName, optionValue);
-            dataBaseHandler.saveDocument("serverconfigs", serverconfig);
-        } else {
-            // Wenn das Dokument existiert, Wert aktualisieren/hinzufügen
-            existingDocument.append(subcommandName, optionValue);
-        dataBaseHandler.updateDocument("serverconfigs", guildId, event.getSubcommandName(), event.getOption(event.getSubcommandName()).toString());
         }
     }
 }
