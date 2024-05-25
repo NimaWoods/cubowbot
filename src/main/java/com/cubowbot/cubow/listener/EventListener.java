@@ -81,6 +81,7 @@ public class EventListener extends ListenerAdapter {
     public void onUserActivityStart(UserActivityStartEvent event) {
         if (ConfigHandler.getServerConfig(event.getGuild().getId(), "Live_Notification_Channel") != null) {
             if (event.getNewActivity().getType() == Activity.ActivityType.STREAMING) {
+                System.out.println(event.getMember() + " ist live");
                 TextChannel channel = event.getJDA().getTextChannelById(ConfigHandler.getServerConfig(event.getGuild().getId(), "Live_Notification_Channel"));
                 String streamerName = event.getUser().getName();
                 String streamUrl = event.getNewActivity().getUrl();
