@@ -2,6 +2,7 @@ package com.cubowbot.cubow.handler.discord;
 
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 
+import java.time.OffsetDateTime;
 import java.util.Objects;
 
 public class TextResponseHandler {
@@ -19,6 +20,7 @@ public class TextResponseHandler {
     }
 
     public void sendPing() {
-        event.reply("pong!").setEphemeral(true).queue();
+        OffsetDateTime time = event.getTimeCreated();
+        event.reply("pong!" + time).setEphemeral(true).queue();
     }
 }

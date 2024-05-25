@@ -14,7 +14,7 @@ public class SlashCommandListener extends ListenerAdapter {
     public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
 
         logger.info("\nExecuting Slash Command \"" + event.getName()
-                + "\" for subcommand \"" + event.getSubcommandName()
+                + "\" with subcommand \"" + event.getSubcommandName()
                 + "\" for user \"" + event.getMember().getEffectiveName()
                 + "\" on server \"" + event.getGuild().getName() + "\"");
 
@@ -63,7 +63,7 @@ public class SlashCommandListener extends ListenerAdapter {
                 break;
 
             // settings
-            case "options":
+            /* case "options":
                 configHandler.saveOption(event);
                 break;
             case "ticketoptions":
@@ -71,7 +71,7 @@ public class SlashCommandListener extends ListenerAdapter {
                 break;
             case "notificationoptions":
                 configHandler.saveOption(event);
-                break;
+                break; */
 
             //misc
             case "avatar":

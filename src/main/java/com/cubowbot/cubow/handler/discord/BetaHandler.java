@@ -5,21 +5,16 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
-import org.bson.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.awt.*;
-import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class BetaHandler {
     private static final Logger logger = LoggerFactory.getLogger(BetaHandler.class);
@@ -72,7 +67,8 @@ public class BetaHandler {
     }
 
     public void memberJoinedBeta(ButtonInteractionEvent event ) {
-        CubowApplication cubowApplication = new CubowApplication();
+        // TODO add with Database
+       /* CubowApplication cubowApplication = new CubowApplication();
         JDA bot = cubowApplication.getJDA();
 
         event.deferReply().setEphemeral(true).queue();
@@ -123,11 +119,11 @@ public class BetaHandler {
             event.getHook().editOriginalEmbeds(eb.build())
                     .setActionRow(Button.link("https://cubow.nimawoods.de/invite", "Cubow einladen"))
                     .queue();
-        }
+        } */
     }
 
     public void joinedServer(GuildJoinEvent event) {
-        DataBaseHandler dataBaseHandler = new DataBaseHandler();
+        /* DataBaseHandler dataBaseHandler = new DataBaseHandler();
         EmbedBuilder eb = new EmbedBuilder();
 
         Guild guild = event.getGuild();
@@ -163,7 +159,7 @@ public class BetaHandler {
                     .queue();
 
             guild.leave().queue();
-        }
+        }*/
     }
 
 }
